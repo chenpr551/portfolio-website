@@ -19,7 +19,6 @@ npm run dev
 ## 待办 / 接入真实素材
 
 - 用真实项目图片/视频替换 `ProjectEntry` 里的 `GeometricPlaceholder` 占位色块（建议图片放入 `public/images/<project-id>/`，在 `src/data/projects.ts` 里加 `image` 字段后接入）
-- `/about` 页的简历下载按钮链接到 `/resume.pdf`，需要把简历文件放进 `public/resume.pdf`
 - 装置项目的观众反馈引语（`quotes` 字段）目前为空，有素材后可直接填入 `projects.ts`
 
 ## 部署
