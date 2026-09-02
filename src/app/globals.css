@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #131211;
+  --bg-alt: #1b1917;
+  --fg: #f3ede4;
+  --fg-dim: #a89f92;
+  --line: #35312c;
+
+  --accent-orange: #e2542b;
+  --accent-lime: #b7d33a;
+  --accent-blue: #4a5fd9;
+  --accent-yellow: #e8b23d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-fg: var(--fg);
+  --color-fg-dim: var(--fg-dim);
+  --color-line: var(--line);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-lime: var(--accent-lime);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-yellow: var(--accent-yellow);
+  --font-display: var(--font-space-grotesk), var(--font-noto-sans-sc),
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-body: var(--font-noto-sans-sc), var(--font-space-grotesk),
+    "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--bg);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  position: relative;
+}
+
+/* fixed grain texture overlay, sits above bg, below content interaction */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+::selection {
+  background: var(--accent-orange);
+  color: var(--bg);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

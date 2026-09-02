@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pengran Chen — Portfolio
 
-## Getting Started
+Pengran Chen（陈芃然）个人作品集网站。Next.js（App Router）+ TypeScript + Tailwind CSS v4。
 
-First, run the development server:
+## 开发
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+打开 [http://localhost:3000](http://localhost:3000)。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 项目结构
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/` — 页面路由：首页 `/`，装置 `/installations`，AI影像 `/ai-video`，实验影像 `/experimental-video`，游戏 `/games`，关于 `/about`
+- `src/data/projects.ts` — 所有作品的数据源。新增作品/类别时只需在这个数组里追加一条记录，无需改动页面结构
+- `src/components/` — `Nav`、`Footer`、`ParticleField`（首页鼠标/触控跟随发光粒子）、`ProjectEntry` / `ProjectLine`（作品展示两种排版）、`PageHeader`
 
-## Learn More
+## 待办 / 接入真实素材
 
-To learn more about Next.js, take a look at the following resources:
+- 用真实项目图片/视频替换 `ProjectEntry` 里的 `GeometricPlaceholder` 占位色块（建议图片放入 `public/images/<project-id>/`，在 `src/data/projects.ts` 里加 `image` 字段后接入）
+- `/about` 页的简历下载按钮链接到 `/resume.pdf`，需要把简历文件放进 `public/resume.pdf`
+- 装置项目的观众反馈引语（`quotes` 字段）目前为空，有素材后可直接填入 `projects.ts`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 部署
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+推送到 GitHub 后，在 [Vercel](https://vercel.com/new) 导入仓库即可，Vercel 会自动识别 Next.js 项目并配置好 CI/CD。
