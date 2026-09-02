@@ -24,4 +24,7 @@ npm run dev
 
 ## 部署
 
-推送到 GitHub 后，在 [Vercel](https://vercel.com/new) 导入仓库即可，Vercel 会自动识别 Next.js 项目并配置好 CI/CD。
+- 仓库：https://github.com/chenpr551/portfolio-website
+- 线上地址：https://portfolio-website-five-lyart-90.vercel.app
+
+已连接 Vercel Git 集成，推送到 `master` 分支会自动触发生产部署。
