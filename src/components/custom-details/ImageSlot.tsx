@@ -1,16 +1,45 @@
+import Image from "next/image";
+
 export function ImageSlot({
   filename,
   note,
   aspect = "aspect-[4/3]",
   variant = "block",
   className = "",
+  src,
+  alt,
 }: {
   filename: string;
   note?: string;
   aspect?: string;
   variant?: "block" | "bg";
   className?: string;
+  src?: string;
+  alt?: string;
 }) {
+  if (src) {
+    if (variant === "bg") {
+      return (
+        <div className={`absolute inset-0 overflow-hidden ${className}`}>
+          <Image src={src} alt={alt ?? filename} fill sizes="100vw" className="object-cover" />
+        </div>
+      );
+    }
+    return (
+      <div
+        className={`relative overflow-hidden border border-line bg-bg-alt ${aspect} ${className}`}
+      >
+        <Image
+          src={src}
+          alt={alt ?? filename}
+          fill
+          sizes="(min-width: 1400px) 700px, 100vw"
+          className="object-cover"
+        />
+      </div>
+    );
+  }
+
   if (variant === "bg") {
     return (
       <div

@@ -3,7 +3,11 @@ import { ImageSlot } from "./ImageSlot";
 import { NodeConnector } from "./NodeConnector";
 
 const NODES = [
-  { label: "线框建筑", filename: "patrol2-node-wireframe.jpg" },
+  {
+    label: "线框建筑",
+    filename: "patrol2-node-wireframe.jpg",
+    src: "/images/patrol-2/patrol2-node-wireframe.webp",
+  },
   { label: "球体/菱形节点", filename: "patrol2-node-sphere.jpg" },
   { label: "数据纹理", filename: "patrol2-node-datatexture.jpg" },
   { label: "灰阶渐变", filename: "patrol2-node-gradient.jpg" },
@@ -40,16 +44,13 @@ export function Patrol2Detail() {
 
       {/* 2. "监视器画框"特写 */}
       <section className="border-b border-line py-9">
-        <div className="mx-auto max-w-lg rounded-md border-4 border-fg/20 bg-black p-2 shadow-[0_0_40px_rgba(0,0,0,0.4)]">
-          <div className="flex items-center justify-between px-1 pb-1">
-            <span className="font-mono text-[10px] text-accent-lime">● REC</span>
-            <span className="font-mono text-[10px] text-fg-dim">CAM 2</span>
-          </div>
+        <div className="mx-auto max-w-lg rounded-md border-4 border-fg/20 bg-black p-1 shadow-[0_0_40px_rgba(0,0,0,0.4)]">
           <ImageSlot
             filename="patrol2-monitor-view.jpg"
+            src="/images/patrol-2/patrol2-monitor-view.webp"
             note="cam2 点云截图"
             aspect="aspect-video"
-            className="border-fg/10"
+            className="border-0"
           />
         </div>
       </section>
@@ -61,7 +62,7 @@ export function Patrol2Detail() {
           {NODES.map((node, i) => (
             <Fragment key={node.label}>
               <div className="w-full max-w-xs border border-line bg-bg-alt/40 p-3 text-center">
-                <ImageSlot filename={node.filename} aspect="aspect-video" />
+                <ImageSlot filename={node.filename} src={node.src} aspect="aspect-video" />
                 <p className="mt-2 font-display text-xs font-bold">{node.label}</p>
               </div>
               {i < NODES.length - 1 && (
@@ -77,28 +78,33 @@ export function Patrol2Detail() {
       {/* 4. 点云城市 + 相机定位画面 */}
       <section className="border-b border-line py-9">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <ImageSlot filename="patrol2-cityscape-wide.jpg" note="点云城市大图" aspect="aspect-[4/3]" />
+          <ImageSlot
+            filename="patrol2-cityscape-wide.jpg"
+            src="/images/patrol-2/patrol2-cityscape-wide.webp"
+            note="点云城市大图"
+            aspect="aspect-video"
+          />
           <ImageSlot
             filename="patrol2-camera-in-scene.jpg"
+            src="/images/patrol-2/patrol2-camera-in-scene.webp"
             note="相机对象在点云空间中定位（camblend1）"
-            aspect="aspect-[4/3]"
+            aspect="aspect-video"
           />
         </div>
       </section>
 
       {/* 5. 手势追踪说明文字 + 散点图案 */}
       <section className="border-b border-line py-9">
-        <div className="grid grid-cols-1 items-center gap-6 sm:grid-cols-[1fr_auto]">
-          <p className="max-w-md text-[15px] leading-[1.7] text-fg-dim">
-            系统基于 MediaPipe 手势追踪，赋予观众对数字空间的主导权。
-          </p>
-          <ImageSlot
-            filename="patrol2-handtrack-dots.jpg"
-            note="手势追踪散点截图"
-            aspect="aspect-square"
-            className="w-32"
-          />
-        </div>
+        <p className="max-w-md text-[15px] leading-[1.7] text-fg-dim">
+          系统基于 MediaPipe 手势追踪，赋予观众对数字空间的主导权。
+        </p>
+        <ImageSlot
+          filename="patrol2-handtrack-dots.jpg"
+          src="/images/patrol-2/patrol2-handtrack-dots.webp"
+          note="手势追踪散点截图"
+          aspect="aspect-video"
+          className="mt-5"
+        />
       </section>
 
       {/* 6. 引语 */}
