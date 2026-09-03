@@ -208,12 +208,14 @@ export const projects: Project[] = [
           {
             text: "My daughter likes it a lot.",
             source: "现场观众",
-            src: "/images/blooming-breathe/site-photo-child.jpg",
+            src: "/images/blooming-breathe/site-photo-child.webp",
+            hasPhoto: true,
           },
           {
             text: "It's like magic! The real-time visual feedback is so smooth, it feels like I'm bringing this corner to life with my own hands.",
             source: "现场观众",
-            src: "/images/blooming-breathe/site-photo-closeup.jpg",
+            src: "/images/blooming-breathe/site-photo-closeup.webp",
+            hasPhoto: true,
           },
         ],
       },
