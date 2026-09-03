@@ -84,7 +84,7 @@ export const projects: Project[] = [
     hasCover: true,
     category: "installations",
     title: "Temporary Roommate",
-    year: 2025,
+    year: 2026,
     tools: ["MediaPipe 人体姿态追踪", "TouchDesigner", "Unity"],
     description:
       "动作捕捉 + 空间叙事的交互装置。参与者进入镜头视野后被实时转化为随机生成的家具，家具随人物移动；当两人靠近，各自的家具会跨越边界融合成更大的家具；融合后的家具 20 秒后消失。",
