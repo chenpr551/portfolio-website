@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import { ProjectDetail } from "@/components/ProjectDetail";
 import { ProjectLine } from "@/components/ProjectEntry";
 import { categoryMeta, getProjectsByCategory } from "@/data/projects";
 
@@ -15,7 +16,14 @@ export default function GamesPage() {
       <div className="px-5 pb-24 sm:px-8">
         <div className="mx-auto max-w-[1400px]">
           {items.map((p, i) => (
-            <ProjectLine key={p.id} project={p} index={i} />
+            <div key={p.id}>
+              <ProjectLine project={p} index={i} />
+              {(p.infoStrip || p.detail) && (
+                <div className="pb-14 pt-2 sm:pl-16">
+                  <ProjectDetail infoStrip={p.infoStrip} blocks={p.detail} />
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
