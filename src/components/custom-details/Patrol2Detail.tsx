@@ -25,7 +25,7 @@ const NODES = [
 
 export function Patrol2Detail() {
   return (
-    <div className="max-w-4xl">
+    <div>
       {/* 1. 标题区 */}
       <section className="relative overflow-hidden border-b border-line py-10 sm:py-14">
         <div className="absolute right-0 top-0 h-full w-1/3">
@@ -88,14 +88,14 @@ export function Patrol2Detail() {
 
       {/* 4. 手势追踪说明文字 */}
       <section className="border-b border-line py-9">
-        <p className="max-w-md text-[15px] leading-[1.7] text-fg-dim">
+        <p className="max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">
           系统基于 MediaPipe 手势追踪，赋予观众对数字空间的主导权。
         </p>
       </section>
 
       {/* 5. 交互方式说明文字 */}
       <section className="border-b border-line py-9">
-        <p className="max-w-2xl text-[15px] leading-[1.7] text-fg-dim">
+        <p className="max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">
           通过握拳、张开等直觉手势，观众可以操控点云宇宙的物质密度与扩张程度。
         </p>
       </section>

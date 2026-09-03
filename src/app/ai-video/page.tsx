@@ -22,7 +22,7 @@ export default function AiVideoPage() {
       />
 
       <div className="px-5 sm:px-8">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1200px]">
           <ProjectAccordionProvider>
             <h2 className="pt-14 font-display text-xl tracking-wide text-fg-dim sm:pt-20">
               个人创作 / 获奖作品

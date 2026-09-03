@@ -4,7 +4,7 @@ const MJ_PARAMS = "--ar16:9 --raw --v7 --stylize 200 --chaos 10";
 
 export function PatrolDetail() {
   return (
-    <div className="max-w-4xl">
+    <div>
       {/* 1. 标题区 */}
       <section className="relative overflow-hidden border-b border-line py-10 sm:py-14">
         <ImageSlot filename="patrol-still-1.jpg" variant="bg" className="opacity-40" />
@@ -39,7 +39,7 @@ export function PatrolDetail() {
         <p className="text-xs tracking-wide text-fg-dim">
           Living with Hyperobjects — AI and the Technosphere
         </p>
-        <p className="mt-4 max-w-[640px] border-l-2 border-accent-orange pl-5 text-[15px] leading-[1.7] text-fg-dim">
+        <p className="mt-4 max-w-[760px] border-l-2 border-accent-orange pl-5 text-[15px] leading-[1.7] text-fg-dim">
           在《Patrol》的世界里，AI并不认为人类的情感有意义，而是将其拆解为一个个独立的数据粒子。人类的情感冲突因此失去了私人意义，只被视为「数据异常」——只是需要被算法修复、管理、归一化的噪声。
         </p>
       </section>
@@ -96,7 +96,7 @@ export function PatrolDetail() {
 
       {/* 8. 收尾文本 */}
       <section className="border-b border-line py-9">
-        <p className="max-w-2xl text-[15px] leading-[1.7] text-fg-dim">
+        <p className="max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">
           当 Ouster LiDAR 扫描是数字骨骼，AI生成的影像是算法皮肤——身体在哪里？我们该如何填补它？
         </p>
       </section>

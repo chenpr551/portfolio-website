@@ -34,7 +34,7 @@ export function ProjectEntry({
         customLayout={project.layout === "custom"}
       />
 
-      <div className="mt-8 max-w-3xl">
+      <div className="mt-8 max-w-[760px]">
         {project.client && (
           <span className="font-display text-sm text-fg-dim">{project.client}</span>
         )}

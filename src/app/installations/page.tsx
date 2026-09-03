@@ -19,7 +19,7 @@ export default function InstallationsPage() {
         description="动作捕捉、投影与实时生成系统构建的空间叙事装置。"
       />
       <div className="px-5 sm:px-8">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1200px]">
           <ProjectAccordionProvider>
             {items.map((p, i) => (
               <ProjectEntry key={p.id} project={p} index={i} />

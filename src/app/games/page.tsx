@@ -14,7 +14,7 @@ export default function GamesPage() {
     <>
       <PageHeader index={meta.index} label={meta.label} labelEn={meta.labelEn} />
       <div className="px-5 pb-24 sm:px-8">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1200px]">
           {items.map((p, i) => (
             <div key={p.id}>
               <ProjectLine project={p} index={i} />

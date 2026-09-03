@@ -30,7 +30,7 @@ function ConceptBlock({
   return (
     <div>
       <BlockLabel index={index} zh="概念" en="CONCEPT" />
-      <div className="mt-4 max-w-[640px] space-y-4 border-l-2 border-accent-orange pl-5">
+      <div className="mt-4 max-w-[760px] space-y-4 border-l-2 border-accent-orange pl-5">
         {block.quote.map((paragraph, i) => (
           <p key={i} className="font-display text-[23px] font-bold leading-snug">
             {paragraph}
@@ -38,17 +38,17 @@ function ConceptBlock({
         ))}
       </div>
       {block.citation && (
-        <p className="mt-4 max-w-[640px] pl-5 text-sm italic text-fg-dim">
+        <p className="mt-4 max-w-[760px] pl-5 text-sm italic text-fg-dim">
           “{block.citation.text}” — {block.citation.source}
         </p>
       )}
       {block.body && (
-        <p className="mt-4 max-w-[640px] text-[15px] leading-[1.7] text-fg-dim">
+        <p className="mt-4 max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">
           {block.body}
         </p>
       )}
       {block.body2 && (
-        <div className="mt-6 max-w-[640px]">
+        <div className="mt-6 max-w-[760px]">
           {block.body2.heading && (
             <p className="mb-2 font-display text-sm font-medium text-fg">
               {block.body2.heading}
@@ -96,7 +96,7 @@ function ProcessBlock({
         ))}
       </div>
       {block.summary && (
-        <p className="mt-5 max-w-2xl text-[15px] leading-[1.7] text-fg-dim">{block.summary}</p>
+        <p className="mt-5 max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">{block.summary}</p>
       )}
     </div>
   );
@@ -130,7 +130,7 @@ function StepsBlock({
           ))}
         </div>
         {block.note && (
-          <p className="mt-5 max-w-2xl text-[15px] leading-[1.7] text-fg-dim">{block.note}</p>
+          <p className="mt-5 max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">{block.note}</p>
         )}
       </div>
     );
@@ -166,7 +166,7 @@ function StepsBlock({
         ))}
       </div>
       {block.note && (
-        <p className="mt-5 max-w-2xl text-[15px] leading-[1.7] text-fg-dim">{block.note}</p>
+        <p className="mt-5 max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">{block.note}</p>
       )}
     </div>
   );
@@ -213,7 +213,7 @@ function FeedbackBlock({
         {block.quotes.map((q, i) => (
           <div key={i}>
             <span className="font-display text-4xl leading-none text-accent-lime">“</span>
-            <p className="mt-1 max-w-[640px] text-lg italic leading-relaxed text-fg">{q.text}</p>
+            <p className="mt-1 max-w-[760px] text-lg italic leading-relaxed text-fg">{q.text}</p>
             {q.source && (
               <p className="mt-2 text-xs tracking-wide text-fg-dim">— {q.source}</p>
             )}
@@ -232,7 +232,7 @@ function BodyBlock({ block }: { block: Extract<DetailBlock, { type: "body" }> })
           {block.heading}
         </p>
       )}
-      <div className="mt-3 max-w-2xl space-y-3">
+      <div className="mt-3 max-w-[760px] space-y-3">
         {block.paragraphs.map((p, i) => (
           <p key={i} className="text-[15px] leading-[1.7] text-fg-dim">
             {p}
@@ -255,7 +255,7 @@ export function ProjectDetail({
   let numberedIndex = 0;
 
   return (
-    <div className="max-w-4xl">
+    <div>
       {infoStrip && (
         <div className="mb-8 inline-block rounded-full border border-line px-3 py-1 text-[11px] tracking-wide text-fg-dim">
           {infoStrip}
