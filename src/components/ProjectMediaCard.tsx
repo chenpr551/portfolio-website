@@ -17,6 +17,7 @@ export function ProjectMediaCard({
   seed,
   infoStrip,
   detail,
+  coverSrc,
 }: {
   id: string;
   index: number;
@@ -27,6 +28,7 @@ export function ProjectMediaCard({
   seed: number;
   infoStrip?: string;
   detail?: DetailBlock[];
+  coverSrc?: string;
 }) {
   const { expandedId, toggle } = useProjectAccordion();
   const [iframeLoaded, setIframeLoaded] = useState(false);
@@ -42,13 +44,26 @@ export function ProjectMediaCard({
         aria-expanded={isOpen}
         className="group relative block aspect-video w-full cursor-pointer overflow-hidden border border-line bg-bg-alt text-left"
       >
-        <div
-          className={`absolute -right-10 -top-16 h-64 w-64 rotate-12 ${color} opacity-90 transition-transform duration-500 ease-out group-hover:scale-110`}
-        />
-        <div className="absolute left-10 bottom-14 h-24 w-24 rounded-full border border-fg/30" />
-        <span className="absolute left-4 top-4 font-display text-[11px] tracking-widest text-fg-dim">
-          VISUAL PLACEHOLDER
-        </span>
+        {coverSrc ? (
+          <Image
+            src={coverSrc}
+            alt={title}
+            fill
+            sizes="(min-width: 1400px) 1400px, 100vw"
+            priority={index < 2}
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          />
+        ) : (
+          <>
+            <div
+              className={`absolute -right-10 -top-16 h-64 w-64 rotate-12 ${color} opacity-90 transition-transform duration-500 ease-out group-hover:scale-110`}
+            />
+            <div className="absolute left-10 bottom-14 h-24 w-24 rounded-full border border-fg/30" />
+            <span className="absolute left-4 top-4 font-display text-[11px] tracking-widest text-fg-dim">
+              VISUAL PLACEHOLDER
+            </span>
+          </>
+        )}
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent transition-opacity duration-300 group-hover:from-black/95" />
 

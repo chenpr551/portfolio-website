@@ -1,6 +1,11 @@
+import Image from "next/image";
 import { categoryMeta, type Project } from "@/data/projects";
 import { getYouTubeId } from "@/lib/youtube";
 import { ProjectMediaCard } from "./ProjectMediaCard";
+
+function coverSrc(project: Project) {
+  return project.hasCover ? `/images/covers/${project.id}.webp` : undefined;
+}
 
 export function ProjectEntry({
   project,
@@ -25,6 +30,7 @@ export function ProjectEntry({
         seed={index}
         infoStrip={project.infoStrip}
         detail={project.detail}
+        coverSrc={coverSrc(project)}
       />
 
       <div className="mt-8 max-w-3xl">
@@ -82,6 +88,17 @@ export function ProjectLine({
       <span className="num font-display text-sm text-fg-dim sm:w-10">
         {String(index + 1).padStart(2, "0")}
       </span>
+      {coverSrc(project) && (
+        <div className="relative h-14 w-24 shrink-0 overflow-hidden border border-line bg-bg-alt">
+          <Image
+            src={coverSrc(project)!}
+            alt={project.title}
+            fill
+            sizes="96px"
+            className="object-cover"
+          />
+        </div>
+      )}
       <h3 className="font-display text-2xl font-medium tracking-tight sm:flex-1 sm:text-3xl">
         {project.title}
       </h3>

@@ -67,12 +67,15 @@ export interface Project {
   infoStrip?: string;
   /** Extended detail content shown when the project card is expanded */
   detail?: DetailBlock[];
+  /** true if /public/images/covers/<id>.webp exists */
+  hasCover?: boolean;
 }
 
 export const projects: Project[] = [
   // ---- Installations ----
   {
     id: "temporary-roommate",
+    hasCover: true,
     category: "installations",
     title: "Temporary Roommate",
     year: 2025,
@@ -120,6 +123,7 @@ export const projects: Project[] = [
   },
   {
     id: "blooming-breathe",
+    hasCover: true,
     category: "installations",
     title: "Blooming Breathe",
     year: 2025,
@@ -176,6 +180,7 @@ export const projects: Project[] = [
   // ---- AI Video — personal / awarded ----
   {
     id: "patrol",
+    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "Patrol",
@@ -203,6 +208,7 @@ export const projects: Project[] = [
   },
   {
     id: "patrol-2",
+    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "Patrol 2",
@@ -232,6 +238,7 @@ export const projects: Project[] = [
   },
   {
     id: "fight-until-the-end",
+    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "Fight Until The End",
@@ -256,6 +263,7 @@ export const projects: Project[] = [
   },
   {
     id: "gallery-of-the-mist",
+    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "The Gallery of The Mist 雾之书廊",
@@ -281,6 +289,7 @@ export const projects: Project[] = [
   // ---- AI Video — client commissions ----
   {
     id: "ccp-104",
+    hasCover: true,
     category: "ai-video",
     kind: "client",
     title: "建党104周年 AI 短片",
@@ -305,6 +314,7 @@ export const projects: Project[] = [
   },
   {
     id: "bbmg",
+    hasCover: true,
     category: "ai-video",
     kind: "client",
     title: "BBMG 金隅冀东水泥 AI 形象动画",
@@ -333,6 +343,7 @@ export const projects: Project[] = [
   // ---- Experimental Video ----
   {
     id: "between-steps",
+    hasCover: true,
     category: "experimental-video",
     title: "Between Steps",
     year: 2024,
@@ -363,6 +374,7 @@ export const projects: Project[] = [
   // ---- Games ----
   {
     id: "close-the-ad",
+    hasCover: true,
     category: "games",
     title: "Close the Ad",
     year: 2025,
