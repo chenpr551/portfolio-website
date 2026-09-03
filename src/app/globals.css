@@ -27,6 +27,7 @@
     "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-body: var(--font-noto-sans-sc), var(--font-space-grotesk),
     "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-handwriting: var(--font-handwriting), cursive;
 }
 
 html {

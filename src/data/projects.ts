@@ -45,7 +45,8 @@ export type DetailBlock =
     }
   | {
       type: "feedback";
-      quotes: { text: string; source?: string }[];
+      /** Quotes with a `src` render as a tilted polaroid-style photo card; quotes without one render as a plain lead-in line. `hasPhoto` gates whether the file actually exists yet -- set true once it's dropped into public/. */
+      quotes: { text: string; source?: string; src?: string; hasPhoto?: boolean }[];
     }
   | {
       type: "body";
@@ -201,13 +202,18 @@ export const projects: Project[] = [
         type: "feedback",
         quotes: [
           {
-            text: "It's like magic! The real-time visual feedback is so smooth, it feels like I'm bringing this corner to life with my own hands.",
-            source: "现场观众",
-          },
-          { text: "My daughter likes it a lot.", source: "现场观众" },
-          {
             text: "I really appreciate the scale of this installation; it sits quietly beside the bench without disrupting the harmony of the public space.",
             source: "现场观众",
+          },
+          {
+            text: "My daughter likes it a lot.",
+            source: "现场观众",
+            src: "/images/blooming-breathe/site-photo-child.jpg",
+          },
+          {
+            text: "It's like magic! The real-time visual feedback is so smooth, it feels like I'm bringing this corner to life with my own hands.",
+            source: "现场观众",
+            src: "/images/blooming-breathe/site-photo-closeup.jpg",
           },
         ],
       },

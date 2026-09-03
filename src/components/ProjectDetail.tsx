@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Image from "next/image";
 import type { DetailBlock } from "@/data/projects";
 import { BLOCK_COLORS } from "@/lib/media";
 import { ImageSlot } from "./custom-details/ImageSlot";
@@ -224,20 +225,71 @@ function FeedbackBlock({
   index: number;
   block: Extract<DetailBlock, { type: "feedback" }>;
 }) {
+  const introQuotes = block.quotes.filter((q) => !q.src);
+  const photoQuotes = block.quotes.filter((q) => q.src);
+
   return (
     <div>
       <BlockLabel index={index} zh="现场反馈" en="FEEDBACK" />
-      <div className="mt-5 space-y-6">
-        {block.quotes.map((q, i) => (
-          <div key={i}>
-            <span className="font-display text-4xl leading-none text-accent-lime">“</span>
-            <p className="mt-1 max-w-[760px] text-lg italic leading-relaxed text-fg">{q.text}</p>
-            {q.source && (
-              <p className="mt-2 text-xs tracking-wide text-fg-dim">— {q.source}</p>
-            )}
-          </div>
-        ))}
-      </div>
+
+      {introQuotes.length > 0 && (
+        <div className="mt-5 space-y-6">
+          {introQuotes.map((q, i) => (
+            <div key={i}>
+              <span className="font-display text-4xl leading-none text-accent-lime">“</span>
+              <p className="mt-1 max-w-[760px] text-lg italic leading-relaxed text-fg">
+                {q.text}
+              </p>
+              {q.source && (
+                <p className="mt-2 text-xs tracking-wide text-fg-dim">— {q.source}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {photoQuotes.length > 0 && (
+        <div
+          className={`grid max-w-[760px] grid-cols-1 gap-10 sm:grid-cols-2 ${
+            introQuotes.length > 0 ? "mt-10" : "mt-5"
+          }`}
+        >
+          {photoQuotes.map((q, i) => (
+            <div
+              key={i}
+              className={`group bg-[#f4f1ea] px-4 pb-12 pt-4 shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-transform duration-300 ease-out hover:rotate-0 hover:scale-[1.03] ${
+                i % 2 === 0 ? "rotate-[-2deg]" : "rotate-[2deg]"
+              }`}
+            >
+              {q.src && q.hasPhoto ? (
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                  <Image
+                    src={q.src}
+                    alt={q.source ?? "现场照片"}
+                    fill
+                    sizes="(min-width: 1400px) 500px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="flex aspect-[4/5] w-full items-center justify-center bg-[#e8e3d8] text-center">
+                  <span className="px-4 font-handwriting text-lg text-[#2a2a2a]/50">
+                    照片待放
+                  </span>
+                </div>
+              )}
+              <p className="mt-3 text-center font-handwriting text-lg leading-snug text-[#2a2a2a]">
+                {q.text}
+              </p>
+              {q.source && (
+                <p className="mt-1 text-center text-[10px] tracking-wide text-[#2a2a2a]/60">
+                  — {q.source}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
