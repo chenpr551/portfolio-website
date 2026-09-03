@@ -71,22 +71,3 @@ body::before {
     transition-duration: 0.001ms !important;
   }
 }
-
-/* TouchDesigner-style node wire, used by Patrol 2's process diagram */
-.wire {
-  stroke: rgba(230, 227, 220, 0.4);
-  stroke-width: 1.4;
-  filter: drop-shadow(0 0 3px rgba(230, 227, 220, 0.35));
-  stroke-dasharray: 6 8;
-  animation: flow 3s linear infinite;
-}
-@keyframes flow {
-  to {
-    stroke-dashoffset: -28;
-  }
-}
-.port {
-  fill: var(--bg-alt);
-  stroke: rgba(230, 227, 220, 0.6);
-  stroke-width: 1.2;
-}

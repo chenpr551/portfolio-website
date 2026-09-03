@@ -1,6 +1,4 @@
-import { Fragment } from "react";
 import { ImageSlot } from "./ImageSlot";
-import { NodeConnector } from "./NodeConnector";
 
 const NODES = [
   {
@@ -54,22 +52,18 @@ export function Patrol2Detail() {
         </div>
       </section>
 
-      {/* 2. 技术流程（纵向节点连线） */}
+      {/* 2. 技术流程（横向自适应网格） */}
       <section className="border-b border-line py-9">
         <p className="font-display text-[11px] tracking-[0.15em] text-fg-dim">PROCESS</p>
-        <div className="mt-5 flex flex-col items-center">
-          {NODES.map((node, i) => (
-            <Fragment key={node.label}>
-              <div className="w-full max-w-xs border border-line bg-bg-alt/40 p-3 text-center">
-                <ImageSlot filename={node.filename} src={node.src} aspect="aspect-video" />
-                <p className="mt-2 font-display text-xs font-bold">{node.label}</p>
-              </div>
-              {i < NODES.length - 1 && (
-                <div className="py-1">
-                  <NodeConnector height={48} />
-                </div>
-              )}
-            </Fragment>
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {NODES.map((node) => (
+            <div
+              key={node.label}
+              className="border border-line bg-bg-alt/40 p-3 text-center"
+            >
+              <ImageSlot filename={node.filename} src={node.src} aspect="aspect-video" />
+              <p className="mt-2 font-display text-xs font-bold">{node.label}</p>
+            </div>
           ))}
         </div>
       </section>
@@ -92,17 +86,11 @@ export function Patrol2Detail() {
         </div>
       </section>
 
-      {/* 4. 手势追踪说明文字 + 散点图案 */}
+      {/* 4. 手势追踪说明文字 */}
       <section className="border-b border-line py-9">
         <p className="max-w-md text-[15px] leading-[1.7] text-fg-dim">
           系统基于 MediaPipe 手势追踪，赋予观众对数字空间的主导权。
         </p>
-        <ImageSlot
-          filename="patrol2-handtrack-dots.jpg"
-          note="手势追踪散点截图（需与封面区分的另一角度）"
-          aspect="aspect-video"
-          className="mt-5"
-        />
       </section>
 
       {/* 5. 交互方式说明文字 */}
