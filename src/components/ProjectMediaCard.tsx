@@ -1,11 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, type ComponentType } from "react";
 import type { DetailBlock } from "@/data/projects";
 import { BLOCK_COLORS } from "@/lib/media";
 import { useProjectAccordion } from "./ProjectAccordion";
 import { ProjectDetail } from "./ProjectDetail";
+import { PatrolDetail } from "./custom-details/PatrolDetail";
+import { Patrol2Detail } from "./custom-details/Patrol2Detail";
+
+const CUSTOM_LAYOUTS: Record<string, ComponentType> = {
+  patrol: PatrolDetail,
+  "patrol-2": Patrol2Detail,
+};
 
 export function ProjectMediaCard({
   id,
@@ -18,6 +25,7 @@ export function ProjectMediaCard({
   infoStrip,
   detail,
   coverSrc,
+  customLayout,
 }: {
   id: string;
   index: number;
@@ -29,12 +37,14 @@ export function ProjectMediaCard({
   infoStrip?: string;
   detail?: DetailBlock[];
   coverSrc?: string;
+  customLayout?: boolean;
 }) {
   const { expandedId, toggle } = useProjectAccordion();
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const isOpen = expandedId === id;
   const color = BLOCK_COLORS[seed % BLOCK_COLORS.length];
-  const hasDetail = infoStrip || (detail && detail.length > 0);
+  const CustomDetail = customLayout ? CUSTOM_LAYOUTS[id] : undefined;
+  const hasDetail = CustomDetail || infoStrip || (detail && detail.length > 0);
 
   return (
     <div className="w-full">
@@ -150,7 +160,11 @@ export function ProjectMediaCard({
 
                 {hasDetail && (
                   <div className={youtubeId ? "mt-9" : ""}>
-                    <ProjectDetail infoStrip={infoStrip} blocks={detail} />
+                    {CustomDetail ? (
+                      <CustomDetail />
+                    ) : (
+                      <ProjectDetail infoStrip={infoStrip} blocks={detail} />
+                    )}
                   </div>
                 )}
               </div>

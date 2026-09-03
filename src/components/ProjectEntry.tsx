@@ -31,6 +31,7 @@ export function ProjectEntry({
         infoStrip={project.infoStrip}
         detail={project.detail}
         coverSrc={coverSrc(project)}
+        customLayout={project.layout === "custom"}
       />
 
       <div className="mt-8 max-w-3xl">

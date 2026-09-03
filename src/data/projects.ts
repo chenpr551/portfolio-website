@@ -69,6 +69,8 @@ export interface Project {
   detail?: DetailBlock[];
   /** true if /public/images/covers/<id>.webp exists */
   hasCover?: boolean;
+  /** "custom" routes the expanded card to a bespoke component instead of ProjectDetail */
+  layout?: "custom";
 }
 
 export const projects: Project[] = [
@@ -189,22 +191,7 @@ export const projects: Project[] = [
     description: "跨媒介实验动画。",
     links: [{ label: "YouTube", url: "https://youtu.be/KWh6XKj9E8Y" }],
     featured: true,
-    detail: [
-      {
-        type: "concept",
-        quote: [
-          "《Patrol》是一部跨媒介实验动画，融合AI生成影像、Ouster LiDAR空间扫描与真人表演。故事设定在一个由无所不在的AI系统统治的未来，人类生活被实时捕获并纳入一套庞大的优化网络。",
-          "在《Patrol》的世界里，AI并不认为人类的情感有意义，而是将其拆解为一个个独立的数据粒子。人类的情感冲突因此失去了私人意义，只被视为「数据异常」——只是需要被算法修复、管理、归一化的噪声。",
-        ],
-        citation: {
-          text: "mosaic-like combinations of particles",
-          source: "Flusser Vilem",
-        },
-        body: "当Ouster LiDAR扫描是数字骨骼，AI生成的影像是算法皮肤——身体在哪里？我们该如何填补它？",
-        toolsNote: "使用工具：Ouster LiDAR、Seedance 2.0",
-      },
-      { type: "visuals", count: 6, note: "6张剧照，赛博朋克场景中的两位女性角色" },
-    ],
+    layout: "custom",
   },
   {
     id: "patrol-2",
@@ -217,24 +204,7 @@ export const projects: Project[] = [
     description: "将 Patrol 的叙事世界转化为可交互的 3D 点云宇宙。",
     links: [{ label: "YouTube", url: "https://youtu.be/40M8dXoJFhg" }],
     featured: true,
-    detail: [
-      {
-        type: "concept",
-        quote: [
-          "《Patrol 2：宇宙》将LiDAR点云与实时生成环境交织在一起。世界不再是静态的观察对象，而是一个动态的「被计算的宇宙」。通过把LiDAR扫描的城市遗迹迁移进实时交互引擎，作品探索了物理现实与算法重构之间的临界点。",
-        ],
-        citation: {
-          text: "Images are no longer windows, but maps.",
-          source: "Flusser Vilem",
-        },
-        body: "系统基于MediaPipe手势追踪，赋予观众对数字空间的主导权。通过握拳、张开等直觉手势，观众可以操控点云宇宙的物质密度与扩张程度。",
-      },
-      {
-        type: "visuals",
-        count: 3,
-        note: "儿童人物的灰阶点云雕塑、城市点云渲染图、TouchDesigner节点图",
-      },
-    ],
+    layout: "custom",
   },
   {
     id: "fight-until-the-end",
