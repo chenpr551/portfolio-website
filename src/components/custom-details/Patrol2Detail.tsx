@@ -8,9 +8,21 @@ const NODES = [
     filename: "patrol2-node-wireframe.jpg",
     src: "/images/patrol-2/patrol2-node-wireframe.webp",
   },
-  { label: "球体/菱形节点", filename: "patrol2-node-sphere.jpg" },
-  { label: "数据纹理", filename: "patrol2-node-datatexture.jpg" },
-  { label: "灰阶渐变", filename: "patrol2-node-gradient.jpg" },
+  {
+    label: "球体/菱形节点",
+    filename: "patrol2-node-sphere.jpg",
+    src: "/images/patrol-2/patrol2-node-sphere.png",
+  },
+  {
+    label: "数据纹理",
+    filename: "patrol2-node-datatexture.jpg",
+    src: "/images/patrol-2/patrol2-node-datatexture.png",
+  },
+  {
+    label: "灰阶渐变",
+    filename: "patrol2-node-gradient.jpg",
+    src: "/images/patrol-2/patrol2-node-gradient.png",
+  },
 ];
 
 export function Patrol2Detail() {
@@ -42,20 +54,7 @@ export function Patrol2Detail() {
         </div>
       </section>
 
-      {/* 2. "监视器画框"特写 */}
-      <section className="border-b border-line py-9">
-        <div className="mx-auto max-w-lg rounded-md border-4 border-fg/20 bg-black p-1 shadow-[0_0_40px_rgba(0,0,0,0.4)]">
-          <ImageSlot
-            filename="patrol2-monitor-view.jpg"
-            src="/images/patrol-2/patrol2-monitor-view.webp"
-            note="cam2 点云截图"
-            aspect="aspect-video"
-            className="border-0"
-          />
-        </div>
-      </section>
-
-      {/* 3. 技术流程（纵向节点连线） */}
+      {/* 2. 技术流程（纵向节点连线） */}
       <section className="border-b border-line py-9">
         <p className="font-display text-[11px] tracking-[0.15em] text-fg-dim">PROCESS</p>
         <div className="mt-5 flex flex-col items-center">
@@ -75,7 +74,7 @@ export function Patrol2Detail() {
         </div>
       </section>
 
-      {/* 4. 点云城市 + 相机定位画面 */}
+      {/* 3. 点云城市 + 相机定位画面 */}
       <section className="border-b border-line py-9">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ImageSlot
@@ -93,41 +92,50 @@ export function Patrol2Detail() {
         </div>
       </section>
 
-      {/* 5. 手势追踪说明文字 + 散点图案 */}
+      {/* 4. 手势追踪说明文字 + 散点图案 */}
       <section className="border-b border-line py-9">
         <p className="max-w-md text-[15px] leading-[1.7] text-fg-dim">
           系统基于 MediaPipe 手势追踪，赋予观众对数字空间的主导权。
         </p>
         <ImageSlot
           filename="patrol2-handtrack-dots.jpg"
-          src="/images/patrol-2/patrol2-handtrack-dots.webp"
-          note="手势追踪散点截图"
+          note="手势追踪散点截图（需与封面区分的另一角度）"
           aspect="aspect-video"
           className="mt-5"
         />
       </section>
 
-      {/* 6. 引语 */}
-      <section className="border-b border-line py-10">
-        <p className="max-w-3xl font-display text-[28px] font-bold italic leading-snug sm:text-[36px]">
-          &quot;Images are no longer windows, but maps.&quot;
-        </p>
-        <p className="mt-3 text-sm tracking-wide text-fg-dim">— Flusser Vilem</p>
-      </section>
-
-      {/* 7. 交互方式说明文字 */}
+      {/* 5. 交互方式说明文字 */}
       <section className="border-b border-line py-9">
         <p className="max-w-2xl text-[15px] leading-[1.7] text-fg-dim">
           通过握拳、张开等直觉手势，观众可以操控点云宇宙的物质密度与扩张程度。
         </p>
       </section>
 
-      {/* 8. 结尾双图并排 */}
-      <section className="py-9">
+      {/* 6. 结尾双图并排 */}
+      <section className="border-b border-line py-9">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <ImageSlot filename="patrol2-final-1.jpg" note="灰阶渲染图" aspect="aspect-[4/3]" />
-          <ImageSlot filename="patrol2-final-2.jpg" note="灰阶渲染图" aspect="aspect-[4/3]" />
+          <ImageSlot
+            filename="patrol2-final-1.jpg"
+            src="/images/patrol-2/patrol2-final-1.jpg"
+            note="实时生成环境渲染图"
+            aspect="aspect-video"
+          />
+          <ImageSlot
+            filename="patrol2-final-2.jpg"
+            src="/images/patrol-2/patrol2-final-2.jpg"
+            note="实时生成环境渲染图"
+            aspect="aspect-video"
+          />
         </div>
+      </section>
+
+      {/* 7. 引语（全文收尾） */}
+      <section className="py-10">
+        <p className="max-w-3xl font-display text-[28px] font-bold italic leading-snug sm:text-[36px]">
+          &quot;Images are no longer windows, but maps.&quot;
+        </p>
+        <p className="mt-3 text-sm tracking-wide text-fg-dim">— Flusser Vilem</p>
       </section>
     </div>
   );
