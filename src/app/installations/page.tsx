@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import { ProjectAccordionProvider } from "@/components/ProjectAccordion";
 import { ProjectEntry } from "@/components/ProjectEntry";
 import { categoryMeta, getProjectsByCategory } from "@/data/projects";
 
@@ -19,9 +20,11 @@ export default function InstallationsPage() {
       />
       <div className="px-5 sm:px-8">
         <div className="mx-auto max-w-[1400px]">
-          {items.map((p, i) => (
-            <ProjectEntry key={p.id} project={p} index={i} />
-          ))}
+          <ProjectAccordionProvider>
+            {items.map((p, i) => (
+              <ProjectEntry key={p.id} project={p} index={i} />
+            ))}
+          </ProjectAccordionProvider>
         </div>
       </div>
     </>

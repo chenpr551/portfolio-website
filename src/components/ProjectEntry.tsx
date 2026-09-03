@@ -1,11 +1,7 @@
-import type { Project } from "@/data/projects";
-
-const BLOCK_COLORS = [
-  "bg-accent-orange",
-  "bg-accent-lime",
-  "bg-accent-blue",
-  "bg-accent-yellow",
-];
+import { categoryMeta, type Project } from "@/data/projects";
+import { BLOCK_COLORS } from "@/lib/media";
+import { getYouTubeId } from "@/lib/youtube";
+import { ProjectMediaCard } from "./ProjectMediaCard";
 
 function GeometricPlaceholder({ seed }: { seed: number }) {
   const color = BLOCK_COLORS[seed % BLOCK_COLORS.length];
@@ -22,6 +18,57 @@ function GeometricPlaceholder({ seed }: { seed: number }) {
   );
 }
 
+function ProjectMeta({ project }: { project: Project }) {
+  return (
+    <>
+      {project.role && (
+        <p className="mt-3 text-sm text-fg-dim">{project.role}</p>
+      )}
+
+      <p className="mt-5 max-w-prose text-[15px] leading-relaxed text-fg/90">
+        {project.description}
+      </p>
+
+      {project.process && project.process.length > 0 && (
+        <div className="mt-6 flex flex-wrap items-center gap-2 text-[12px] tracking-wide text-fg-dim">
+          {project.process.map((step, i) => (
+            <span key={step} className="flex items-center gap-2">
+              <span className="rounded-full border border-line px-3 py-1">
+                {step}
+              </span>
+              {i < project.process!.length - 1 && <span>→</span>}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {project.tools.map((tool) => (
+          <span
+            key={tool}
+            className="rounded-full border border-line px-3 py-1 text-[12px] text-fg-dim"
+          >
+            {tool}
+          </span>
+        ))}
+      </div>
+
+      {project.quotes && project.quotes.length > 0 && (
+        <div className="mt-6 space-y-2">
+          {project.quotes.map((q) => (
+            <blockquote
+              key={q}
+              className="border-l-2 border-accent-orange pl-4 text-sm italic text-fg-dim"
+            >
+              “{q}”
+            </blockquote>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
 export function ProjectEntry({
   project,
   index,
@@ -29,6 +76,55 @@ export function ProjectEntry({
   project: Project;
   index: number;
 }) {
+  const videoLink = project.links?.find((link) => getYouTubeId(link.url));
+  const youtubeId = videoLink ? getYouTubeId(videoLink.url) : null;
+
+  if (youtubeId) {
+    const otherLinks = project.links?.filter((link) => link !== videoLink) ?? [];
+
+    return (
+      <article className="border-t border-line py-14 sm:py-20">
+        <ProjectMediaCard
+          id={project.id}
+          index={index}
+          title={project.title}
+          year={project.year}
+          categoryLabel={categoryMeta[project.category]?.label}
+          youtubeId={youtubeId}
+          seed={index}
+        />
+
+        <div className="mt-8 max-w-3xl">
+          {project.client && (
+            <span className="font-display text-sm text-fg-dim">
+              {project.client}
+            </span>
+          )}
+          <ProjectMeta project={project} />
+
+          {otherLinks.length > 0 && (
+            <div className="mt-7 flex flex-wrap gap-5">
+              {otherLinks.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-2 text-sm tracking-wide text-fg transition-colors hover:text-accent-orange"
+                >
+                  {link.label}
+                  <span className="transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article className="grid grid-cols-1 gap-8 border-t border-line py-14 sm:py-20 lg:grid-cols-12 lg:gap-10">
       <div className="lg:col-span-5">
@@ -50,50 +146,7 @@ export function ProjectEntry({
           {project.title}
         </h3>
 
-        {project.role && (
-          <p className="mt-3 text-sm text-fg-dim">{project.role}</p>
-        )}
-
-        <p className="mt-5 max-w-prose text-[15px] leading-relaxed text-fg/90">
-          {project.description}
-        </p>
-
-        {project.process && project.process.length > 0 && (
-          <div className="mt-6 flex flex-wrap items-center gap-2 text-[12px] tracking-wide text-fg-dim">
-            {project.process.map((step, i) => (
-              <span key={step} className="flex items-center gap-2">
-                <span className="rounded-full border border-line px-3 py-1">
-                  {step}
-                </span>
-                {i < project.process!.length - 1 && <span>→</span>}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.tools.map((tool) => (
-            <span
-              key={tool}
-              className="rounded-full border border-line px-3 py-1 text-[12px] text-fg-dim"
-            >
-              {tool}
-            </span>
-          ))}
-        </div>
-
-        {project.quotes && project.quotes.length > 0 && (
-          <div className="mt-6 space-y-2">
-            {project.quotes.map((q) => (
-              <blockquote
-                key={q}
-                className="border-l-2 border-accent-orange pl-4 text-sm italic text-fg-dim"
-              >
-                “{q}”
-              </blockquote>
-            ))}
-          </div>
-        )}
+        <ProjectMeta project={project} />
 
         {project.links && project.links.length > 0 && (
           <div className="mt-7 flex flex-wrap gap-5">
