@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+function isGif(src: string) {
+  return src.toLowerCase().endsWith(".gif");
+}
+
 export function ImageSlot({
   filename,
   note,
@@ -21,7 +25,16 @@ export function ImageSlot({
     if (variant === "bg") {
       return (
         <div className={`absolute inset-0 overflow-hidden ${className}`}>
-          <Image src={src} alt={alt ?? filename} fill sizes="100vw" className="object-cover" />
+          {isGif(src) ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={src}
+              alt={alt ?? filename}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Image src={src} alt={alt ?? filename} fill sizes="100vw" className="object-cover" />
+          )}
         </div>
       );
     }
@@ -29,13 +42,22 @@ export function ImageSlot({
       <div
         className={`relative overflow-hidden border border-line bg-bg-alt ${aspect} ${className}`}
       >
-        <Image
-          src={src}
-          alt={alt ?? filename}
-          fill
-          sizes="(min-width: 1400px) 700px, 100vw"
-          className="object-cover"
-        />
+        {isGif(src) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={src}
+            alt={alt ?? filename}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <Image
+            src={src}
+            alt={alt ?? filename}
+            fill
+            sizes="(min-width: 1400px) 700px, 100vw"
+            className="object-cover"
+          />
+        )}
       </div>
     );
   }

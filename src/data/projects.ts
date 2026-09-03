@@ -23,7 +23,7 @@ export type DetailBlock =
     }
   | {
       type: "process";
-      nodes: { name: string; caption: string }[];
+      nodes: { name: string; caption: string; src?: string }[];
       summary?: string;
     }
   | {
@@ -31,11 +31,15 @@ export type DetailBlock =
       heading?: string;
       headingEn?: string;
       compact?: boolean;
-      steps: { title: string; caption?: string }[];
+      steps: { title: string; caption?: string; src?: string }[];
       note?: string;
+      /** Small supplementary images shown alongside `note` */
+      noteImages?: { src: string; filename: string }[];
     }
   | {
       type: "visuals";
+      heading?: string;
+      headingEn?: string;
       count: number;
       note?: string;
     }
@@ -96,10 +100,26 @@ export const projects: Project[] = [
       {
         type: "process",
         nodes: [
-          { name: "MediaPipe", caption: "人体姿态追踪" },
-          { name: "OSC", caption: "参数传输" },
-          { name: "TouchDesigner", caption: "实时处理" },
-          { name: "Unity", caption: "场景生成" },
+          {
+            name: "MediaPipe",
+            caption: "人体姿态追踪",
+            src: "/images/temporary-roommate/node-mediapipe.png",
+          },
+          {
+            name: "OSC",
+            caption: "参数传输",
+            src: "/images/temporary-roommate/node-osc.png",
+          },
+          {
+            name: "TouchDesigner",
+            caption: "实时处理",
+            src: "/images/temporary-roommate/node-touchdesigner.png",
+          },
+          {
+            name: "Unity",
+            caption: "场景生成",
+            src: "/images/temporary-roommate/node-unity.gif",
+          },
         ],
         summary:
           "参与者进入摄像头视野后，MediaPipe 实时捕捉人体姿态数据，通过 OSC 协议传输至 TouchDesigner 进行参数映射，再由 Unity 实时生成对应的虚拟家具，家具的位置与移动完全跟随参与者的身体动作。",
@@ -107,17 +127,32 @@ export const projects: Project[] = [
       {
         type: "steps",
         steps: [
-          { title: "吸引 Attraction", caption: "被一个与自己相似的「数字人」所吸引" },
+          {
+            title: "吸引 Attraction",
+            caption: "被一个与自己相似的「数字人」所吸引",
+            src: "/images/temporary-roommate/step-attraction.gif",
+          },
           {
             title: "融合 Merge",
             caption: "当两人靠得足够近，各自的家具会跨越边界融合成一件更大的家具",
+            src: "/images/temporary-roommate/step-merge.gif",
           },
-          { title: "消失 Disappear", caption: "融合后的家具会在 20 秒后消失" },
+          {
+            title: "消失 Disappear",
+            caption: "融合后的家具会在 20 秒后消失",
+            src: "/images/temporary-roommate/step-disappear.gif",
+          },
         ],
         note: "补充：参与者可摆出特定姿势，切换同类家具的不同风格——沙发/椅子/台灯/床",
+        noteImages: [
+          { src: "/images/temporary-roommate/style-chair.gif", filename: "转椅子" },
+          { src: "/images/temporary-roommate/style-bed.gif", filename: "换床" },
+          { src: "/images/temporary-roommate/style-lamp.gif", filename: "换台灯" },
+        ],
       },
       {
         type: "visuals",
+        heading: "装置展览现场",
         count: 2,
         note: "投影幕布 + 参与者剪影的现场照片",
       },

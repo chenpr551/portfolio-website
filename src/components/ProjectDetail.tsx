@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import type { DetailBlock } from "@/data/projects";
 import { BLOCK_COLORS } from "@/lib/media";
+import { ImageSlot } from "./custom-details/ImageSlot";
 
 const STEP_TEXT_COLORS = [
   "text-accent-orange",
@@ -78,6 +79,9 @@ function ProcessBlock({
         {block.nodes.map((node, i) => (
           <Fragment key={node.name}>
             <div className="flex-1 border border-line px-4 py-3">
+              {node.src && (
+                <ImageSlot filename={node.name} src={node.src} aspect="aspect-video" className="mb-3" />
+              )}
               <span
                 className={`inline-block h-2.5 w-2.5 rounded-sm ${
                   BLOCK_COLORS[i % BLOCK_COLORS.length]
@@ -146,11 +150,12 @@ function StepsBlock({
               <span className={`font-display text-sm font-bold ${STEP_TEXT_COLORS[i % STEP_TEXT_COLORS.length]}`}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="mt-3 flex aspect-[16/10] items-center justify-center border border-dashed border-line">
-                <span className="px-2 text-center font-display text-[10px] tracking-widest text-fg-dim">
-                  VISUAL PLACEHOLDER
-                </span>
-              </div>
+              <ImageSlot
+                filename={step.title}
+                src={step.src}
+                aspect="aspect-[16/10]"
+                className="mt-3"
+              />
               <p className="mt-3 font-display text-sm font-bold">{step.title}</p>
               {step.caption && (
                 <p className="mt-1 text-xs leading-relaxed text-fg-dim">{step.caption}</p>
@@ -168,6 +173,19 @@ function StepsBlock({
       {block.note && (
         <p className="mt-5 max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">{block.note}</p>
       )}
+      {block.noteImages && block.noteImages.length > 0 && (
+        <div className="mt-3 flex max-w-[760px] gap-3">
+          {block.noteImages.map((img) => (
+            <ImageSlot
+              key={img.src}
+              filename={img.filename}
+              src={img.src}
+              aspect="aspect-[4/3]"
+              className="flex-1"
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -181,7 +199,7 @@ function VisualsBlock({
 }) {
   return (
     <div>
-      <BlockLabel index={index} zh="配图" en="VISUALS" />
+      <BlockLabel index={index} zh={block.heading ?? "配图"} en={block.headingEn ?? "VISUALS"} />
       <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
         {Array.from({ length: block.count }).map((_, i) => (
           <div
