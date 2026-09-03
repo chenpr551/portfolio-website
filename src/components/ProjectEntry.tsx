@@ -1,10 +1,31 @@
-import Image from "next/image";
 import { categoryMeta, type Project } from "@/data/projects";
+import { resolveAsset } from "@/lib/assets";
+import { resolveProject } from "@/lib/resolveProject";
 import { getYouTubeId } from "@/lib/youtube";
 import { ProjectMediaCard } from "./ProjectMediaCard";
+import { PATROL_ASSETS } from "./custom-details/PatrolDetail";
+import { PATROL2_ASSETS } from "./custom-details/Patrol2Detail";
+import Image from "next/image";
 
-function coverSrc(project: Project) {
-  return project.hasCover ? `/images/covers/${project.id}.webp` : undefined;
+function resolveCustomImages(project: Project): Record<string, string | undefined> | undefined {
+  const slug = project.assetSlug ?? project.id;
+  if (project.id === "patrol") {
+    return Object.fromEntries(
+      Object.entries(PATROL_ASSETS).map(([key, filename]) => [
+        key,
+        resolveAsset(project.category, slug, filename),
+      ])
+    );
+  }
+  if (project.id === "patrol-2") {
+    return Object.fromEntries(
+      Object.entries(PATROL2_ASSETS).map(([key, filename]) => [
+        key,
+        resolveAsset(project.category, slug, filename),
+      ])
+    );
+  }
+  return undefined;
 }
 
 export function ProjectEntry({
@@ -14,6 +35,7 @@ export function ProjectEntry({
   project: Project;
   index: number;
 }) {
+  const resolved = resolveProject(project);
   const videoLink = project.links?.find((link) => getYouTubeId(link.url));
   const youtubeId = videoLink ? getYouTubeId(videoLink.url) ?? undefined : undefined;
   const otherLinks = project.links?.filter((link) => link !== videoLink) ?? [];
@@ -28,10 +50,11 @@ export function ProjectEntry({
         categoryLabel={categoryMeta[project.category]?.label}
         youtubeId={youtubeId}
         seed={index}
-        infoStrip={project.infoStrip}
-        detail={project.detail}
-        coverSrc={coverSrc(project)}
+        infoStrip={resolved.infoStrip}
+        detail={resolved.detail}
+        coverSrc={resolved.coverSrc}
         customLayout={project.layout === "custom"}
+        customImages={resolveCustomImages(project)}
       />
 
       <div className="mt-8 max-w-[760px]">
@@ -84,20 +107,16 @@ export function ProjectLine({
   project: Project;
   index: number;
 }) {
+  const coverSrc = resolveAsset(project.category, project.assetSlug ?? project.id, "cover.webp");
+
   return (
     <article className="group flex flex-col gap-2 border-t border-line py-6 sm:flex-row sm:items-baseline sm:gap-6 sm:py-7">
       <span className="num font-display text-sm text-fg-dim sm:w-10">
         {String(index + 1).padStart(2, "0")}
       </span>
-      {coverSrc(project) && (
+      {coverSrc && (
         <div className="relative h-14 w-24 shrink-0 overflow-hidden border border-line bg-bg-alt">
-          <Image
-            src={coverSrc(project)!}
-            alt={project.title}
-            fill
-            sizes="96px"
-            className="object-cover"
-          />
+          <Image src={coverSrc} alt={project.title} fill sizes="96px" className="object-cover" />
         </div>
       )}
       <h3 className="font-display text-2xl font-medium tracking-tight sm:flex-1 sm:text-3xl">

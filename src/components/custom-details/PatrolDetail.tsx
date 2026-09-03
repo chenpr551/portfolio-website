@@ -2,12 +2,30 @@ import { ImageSlot } from "./ImageSlot";
 
 const MJ_PARAMS = "--ar16:9 --raw --v7 --stylize 200 --chaos 10";
 
-export function PatrolDetail() {
+/** key -> bare filename under public/images/ai-video/patrol/ */
+export const PATROL_ASSETS: Record<string, string> = {
+  "still-1": "still-1.jpg",
+  "still-2": "still-2.jpg",
+  "still-3": "still-3.jpg",
+  "still-4": "still-4.jpg",
+  "still-5": "still-5.jpg",
+  "still-6": "still-6.jpg",
+  "banner-treaty": "banner-treaty.jpg",
+  "light-installation": "light-installation.jpg",
+  "lidar-panorama": "lidar-panorama.jpg",
+};
+
+export function PatrolDetail({ images = {} }: { images?: Record<string, string | undefined> }) {
   return (
     <div>
       {/* 1. 标题区 */}
       <section className="relative overflow-hidden border-b border-line py-10 sm:py-14">
-        <ImageSlot filename="patrol-still-1.jpg" variant="bg" className="opacity-40" />
+        <ImageSlot
+          filename={PATROL_ASSETS["still-1"]}
+          src={images["still-1"]}
+          variant="bg"
+          className="opacity-40"
+        />
         <div className="relative">
           <p className="font-display text-[11px] tracking-[0.15em] text-fg-dim">
             PATROL — CONSTRUCTING A &quot;COMPUTED UNIVERSE&quot;
@@ -26,7 +44,12 @@ export function PatrolDetail() {
         <p className="font-display text-[11px] tracking-[0.15em] text-fg-dim">STILLS</p>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((n) => (
-            <ImageSlot key={n} filename={`patrol-still-${n}.jpg`} aspect="aspect-[4/3]" />
+            <ImageSlot
+              key={n}
+              filename={PATROL_ASSETS[`still-${n}`]}
+              src={images[`still-${n}`]}
+              aspect="aspect-[4/3]"
+            />
           ))}
         </div>
       </section>
@@ -82,12 +105,14 @@ export function PatrolDetail() {
       <section className="border-b border-line py-9">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ImageSlot
-            filename="patrol-light-installation.jpg"
+            filename={PATROL_ASSETS["light-installation"]}
+            src={images["light-installation"]}
             note="彩色灯光装置 / 舞者照片"
             aspect="aspect-[4/3]"
           />
           <ImageSlot
-            filename="patrol-lidar-panorama.jpg"
+            filename={PATROL_ASSETS["lidar-panorama"]}
+            src={images["lidar-panorama"]}
             note="黑白 LiDAR 全景图"
             aspect="aspect-[4/3]"
           />

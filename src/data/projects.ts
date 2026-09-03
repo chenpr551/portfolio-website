@@ -23,6 +23,7 @@ export type DetailBlock =
     }
   | {
       type: "process";
+      /** `src` is a bare filename under the project's asset folder, resolved at render time */
       nodes: { name: string; caption: string; src?: string }[];
       summary?: string;
     }
@@ -31,22 +32,24 @@ export type DetailBlock =
       heading?: string;
       headingEn?: string;
       compact?: boolean;
+      /** `src` is a bare filename under the project's asset folder, resolved at render time */
       steps: { title: string; caption?: string; src?: string }[];
       note?: string;
-      /** Small supplementary images shown alongside `note` */
+      /** Small supplementary images shown alongside `note` (bare filenames) */
       noteImages?: { src: string; filename: string }[];
     }
   | {
       type: "visuals";
       heading?: string;
       headingEn?: string;
-      count: number;
+      /** Bare filenames under the project's asset folder, each resolved (or placeholder'd) individually. `src` is populated by resolveProject(). */
+      images: { filename: string; src?: string }[];
       note?: string;
     }
   | {
       type: "feedback";
-      /** Quotes with a `src` render as a tilted polaroid-style photo card; quotes without one render as a plain lead-in line. `hasPhoto` gates whether the file actually exists yet -- set true once it's dropped into public/. */
-      quotes: { text: string; source?: string; src?: string; hasPhoto?: boolean }[];
+      /** Quotes with a `src` render as a tilted polaroid-style photo card (bare filename, resolved at render time); quotes without one render as a plain lead-in line */
+      quotes: { text: string; source?: string; src?: string }[];
     }
   | {
       type: "body";
@@ -57,6 +60,11 @@ export type DetailBlock =
 export interface Project {
   id: string;
   category: ProjectCategory;
+  /**
+   * Folder name under public/images/<category>/ if it differs from `id`
+   * (e.g. id "ccp-104" -> folder "104th-anniversary"). Defaults to `id`.
+   */
+  assetSlug?: string;
   /** Only used within ai-video to split personal vs. commissioned work */
   kind?: "personal" | "client";
   title: string;
@@ -72,8 +80,6 @@ export interface Project {
   infoStrip?: string;
   /** Extended detail content shown when the project card is expanded */
   detail?: DetailBlock[];
-  /** true if /public/images/covers/<id>.webp exists */
-  hasCover?: boolean;
   /** "custom" routes the expanded card to a bespoke component instead of ProjectDetail */
   layout?: "custom";
 }
@@ -82,7 +88,6 @@ export const projects: Project[] = [
   // ---- Installations ----
   {
     id: "temporary-roommate",
-    hasCover: true,
     category: "installations",
     title: "Temporary Roommate",
     year: 2026,
@@ -101,26 +106,10 @@ export const projects: Project[] = [
       {
         type: "process",
         nodes: [
-          {
-            name: "MediaPipe",
-            caption: "人体姿态追踪",
-            src: "/images/temporary-roommate/node-mediapipe.png",
-          },
-          {
-            name: "OSC",
-            caption: "参数传输",
-            src: "/images/temporary-roommate/node-osc.png",
-          },
-          {
-            name: "TouchDesigner",
-            caption: "实时处理",
-            src: "/images/temporary-roommate/node-touchdesigner.png",
-          },
-          {
-            name: "Unity",
-            caption: "场景生成",
-            src: "/images/temporary-roommate/node-unity.gif",
-          },
+          { name: "MediaPipe", caption: "人体姿态追踪", src: "process-mediapipe.png" },
+          { name: "OSC", caption: "参数传输", src: "process-osc.png" },
+          { name: "TouchDesigner", caption: "实时处理", src: "process-touchdesigner.png" },
+          { name: "Unity", caption: "场景生成", src: "process-unity.gif" },
         ],
         summary:
           "参与者进入摄像头视野后，MediaPipe 实时捕捉人体姿态数据，通过 OSC 协议传输至 TouchDesigner 进行参数映射，再由 Unity 实时生成对应的虚拟家具，家具的位置与移动完全跟随参与者的身体动作。",
@@ -131,37 +120,36 @@ export const projects: Project[] = [
           {
             title: "吸引 Attraction",
             caption: "被一个与自己相似的「数字人」所吸引",
-            src: "/images/temporary-roommate/step-attraction.gif",
+            src: "step-attraction.gif",
           },
           {
             title: "融合 Merge",
             caption: "当两人靠得足够近，各自的家具会跨越边界融合成一件更大的家具",
-            src: "/images/temporary-roommate/step-merge.gif",
+            src: "step-merge.gif",
           },
           {
             title: "消失 Disappear",
             caption: "融合后的家具会在 20 秒后消失",
-            src: "/images/temporary-roommate/step-disappear.gif",
+            src: "step-disappear.gif",
           },
         ],
         note: "补充：参与者可摆出特定姿势，切换同类家具的不同风格——沙发/椅子/台灯/床",
         noteImages: [
-          { src: "/images/temporary-roommate/style-chair.gif", filename: "转椅子" },
-          { src: "/images/temporary-roommate/style-bed.gif", filename: "换床" },
-          { src: "/images/temporary-roommate/style-lamp.gif", filename: "换台灯" },
+          { src: "style-switch-chair.gif", filename: "转椅子" },
+          { src: "style-switch-bed.gif", filename: "换床" },
+          { src: "style-switch-lamp.gif", filename: "换台灯" },
         ],
       },
       {
         type: "visuals",
         heading: "装置展览现场",
-        count: 2,
+        images: [{ filename: "exhibition-1.jpg" }, { filename: "exhibition-2.jpg" }],
         note: "投影幕布 + 参与者剪影的现场照片",
       },
     ],
   },
   {
     id: "blooming-breathe",
-    hasCover: true,
     category: "installations",
     title: "Blooming Breathe",
     year: 2025,
@@ -190,12 +178,24 @@ export const projects: Project[] = [
         headingEn: "HOW IT WORKS",
         compact: true,
         steps: [
-          { title: "自然手势交互" },
-          { title: "实时感应与追踪", caption: "MediaPipe 从摄像头捕捉手部关键点" },
-          { title: "数据映射与处理" },
-          { title: "动态视觉反馈", caption: "橡皮擦效果" },
-          { title: "精确投影映射", caption: "Kantan Mapper 对齐立体花朵模型" },
-          { title: "硬件协同背光", caption: "Arduino Uno R3 控制 LED 灯带" },
+          { title: "自然手势交互", src: "step-1.jpg" },
+          {
+            title: "实时感应与追踪",
+            caption: "MediaPipe 从摄像头捕捉手部关键点",
+            src: "step-2.jpg",
+          },
+          { title: "数据映射与处理", src: "step-3.jpg" },
+          { title: "动态视觉反馈", caption: "橡皮擦效果", src: "step-4.jpg" },
+          {
+            title: "精确投影映射",
+            caption: "Kantan Mapper 对齐立体花朵模型",
+            src: "step-5.jpg",
+          },
+          {
+            title: "硬件协同背光",
+            caption: "Arduino Uno R3 控制 LED 灯带",
+            src: "step-6.jpg",
+          },
         ],
       },
       {
@@ -208,14 +208,12 @@ export const projects: Project[] = [
           {
             text: "My daughter likes it a lot.",
             source: "现场观众",
-            src: "/images/blooming-breathe/site-photo-child.webp",
-            hasPhoto: true,
+            src: "site-photo-child.webp",
           },
           {
             text: "It's like magic! The real-time visual feedback is so smooth, it feels like I'm bringing this corner to life with my own hands.",
             source: "现场观众",
-            src: "/images/blooming-breathe/site-photo-closeup.webp",
-            hasPhoto: true,
+            src: "site-photo-closeup.webp",
           },
         ],
       },
@@ -225,7 +223,6 @@ export const projects: Project[] = [
   // ---- AI Video — personal / awarded ----
   {
     id: "patrol",
-    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "Patrol",
@@ -238,7 +235,6 @@ export const projects: Project[] = [
   },
   {
     id: "patrol-2",
-    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "Patrol 2",
@@ -251,7 +247,6 @@ export const projects: Project[] = [
   },
   {
     id: "fight-until-the-end",
-    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "Fight Until The End",
@@ -269,14 +264,13 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        count: 3,
-        note: "双子星宇航舱女性角色、控制室「地球联合国委员会」场景、发光手部特效场景",
+        images: [{ filename: "support-1.jpg" }, { filename: "support-2.jpg" }],
+        note: "控制室「地球联合国委员会」场景、发光手部特效场景",
       },
     ],
   },
   {
     id: "gallery-of-the-mist",
-    hasCover: true,
     category: "ai-video",
     kind: "personal",
     title: "The Gallery of The Mist 雾之书廊",
@@ -293,8 +287,12 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        count: 8,
-        note: "书法字「雾」「書」「之廊」、古建筑雾中场景、握笔书写古卷轴的手部特写、蓝色调雾中长廊人影、四张分镜片段",
+        images: [
+          { filename: "calligraphy.jpg" },
+          { filename: "pavilion.jpg" },
+          { filename: "scroll-writing.jpg" },
+        ],
+        note: "书法字构图、古建筑雾中场景、握笔书写古卷轴的手部特写",
       },
     ],
   },
@@ -302,7 +300,7 @@ export const projects: Project[] = [
   // ---- AI Video — client commissions ----
   {
     id: "ccp-104",
-    hasCover: true,
+    assetSlug: "104th-anniversary",
     category: "ai-video",
     kind: "client",
     title: "建党104周年 AI 短片",
@@ -320,14 +318,14 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        count: 5,
-        note: "手持党徽特写、四张人生阶段剧照——戴红领巾的孩子、宣誓的青年、伏案工作的中年人、戴绶带的老人",
+        images: [{ filename: "badge-closeup.jpg" }],
+        note: "手持党徽特写",
       },
     ],
   },
   {
     id: "bbmg",
-    hasCover: true,
+    assetSlug: "bbmg-cement",
     category: "ai-video",
     kind: "client",
     title: "BBMG 金隅冀东水泥 AI 形象动画",
@@ -347,8 +345,8 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        count: 3,
-        note: "绿色立方体吉祥物「小C」、光伏风电插画场景、「让我们携手并进 共绘美丽中国新画卷」宣传banner",
+        images: [{ filename: "mascot-closeup.jpg" }, { filename: "banner.jpg" }],
+        note: "吉祥物「小C」、「让我们携手并进 共绘美丽中国新画卷」宣传banner",
       },
     ],
   },
@@ -356,7 +354,6 @@ export const projects: Project[] = [
   // ---- Experimental Video ----
   {
     id: "between-steps",
-    hasCover: true,
     category: "experimental-video",
     title: "Between Steps",
     year: 2024,
@@ -378,8 +375,12 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        count: 4,
-        note: "手绘无限楼梯草图、原始摄影小样 contact sheet、RGB色差故障效果剧照、霓虹长廊剪影人物",
+        images: [
+          { filename: "sketch.jpg" },
+          { filename: "contact-sheet.jpg" },
+          { filename: "glitch-still.jpg" },
+        ],
+        note: "手绘无限楼梯草图、原始摄影小样 contact sheet、RGB色差故障效果剧照",
       },
     ],
   },
@@ -387,7 +388,6 @@ export const projects: Project[] = [
   // ---- Games ----
   {
     id: "close-the-ad",
-    hasCover: true,
     category: "games",
     title: "Close the Ad",
     year: 2025,
@@ -419,8 +419,13 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        count: 6,
-        note: "GameMaker对象列表面板、关卡控制脚本代码截图、动画时间轴面板、虚假「Super Antivirus」警告弹窗、「Paster Battle」游戏内假广告、情绪值进度条UI",
+        images: [
+          { filename: "gamemaker-objects.jpg" },
+          { filename: "level-script.jpg" },
+          { filename: "fake-antivirus.jpg" },
+          { filename: "fake-ad.jpg" },
+        ],
+        note: "GameMaker对象列表面板、关卡控制脚本代码截图、虚假「Super Antivirus」警告弹窗、「Paster Battle」游戏内假广告",
       },
     ],
   },

@@ -9,7 +9,9 @@ import { ProjectDetail } from "./ProjectDetail";
 import { PatrolDetail } from "./custom-details/PatrolDetail";
 import { Patrol2Detail } from "./custom-details/Patrol2Detail";
 
-const CUSTOM_LAYOUTS: Record<string, ComponentType> = {
+type CustomDetailProps = { images?: Record<string, string | undefined> };
+
+const CUSTOM_LAYOUTS: Record<string, ComponentType<CustomDetailProps>> = {
   patrol: PatrolDetail,
   "patrol-2": Patrol2Detail,
 };
@@ -26,6 +28,7 @@ export function ProjectMediaCard({
   detail,
   coverSrc,
   customLayout,
+  customImages,
 }: {
   id: string;
   index: number;
@@ -38,6 +41,7 @@ export function ProjectMediaCard({
   detail?: DetailBlock[];
   coverSrc?: string;
   customLayout?: boolean;
+  customImages?: Record<string, string | undefined>;
 }) {
   const { expandedId, toggle } = useProjectAccordion();
   const [iframeLoaded, setIframeLoaded] = useState(false);
@@ -161,7 +165,7 @@ export function ProjectMediaCard({
                 {hasDetail && (
                   <div className={youtubeId ? "mt-9" : ""}>
                     {CustomDetail ? (
-                      <CustomDetail />
+                      <CustomDetail images={customImages} />
                     ) : (
                       <ProjectDetail infoStrip={infoStrip} blocks={detail} />
                     )}

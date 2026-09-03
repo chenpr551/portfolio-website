@@ -121,12 +121,18 @@ function StepsBlock({
     return (
       <div>
         <BlockLabel index={index} zh={zh} en={en} />
-        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-5">
+        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-8">
           {block.steps.map((step, i) => (
             <div key={step.title} className="w-full sm:w-[calc(33.333%-1rem)]">
               <span className={`font-display text-sm font-bold ${STEP_TEXT_COLORS[i % STEP_TEXT_COLORS.length]}`}>
                 {String(i + 1).padStart(2, "0")}
               </span>
+              <ImageSlot
+                filename={step.title}
+                src={step.src}
+                aspect="aspect-[4/3]"
+                className="mt-2"
+              />
               <p className="mt-2 font-display text-sm font-bold">{step.title}</p>
               {step.caption && (
                 <p className="mt-1 text-xs leading-relaxed text-fg-dim">{step.caption}</p>
@@ -202,15 +208,13 @@ function VisualsBlock({
     <div>
       <BlockLabel index={index} zh={block.heading ?? "配图"} en={block.headingEn ?? "VISUALS"} />
       <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {Array.from({ length: block.count }).map((_, i) => (
-          <div
-            key={i}
-            className="flex aspect-[4/3] items-center justify-center border border-dashed border-line"
-          >
-            <span className="px-2 text-center font-display text-[10px] tracking-widest text-fg-dim">
-              VISUAL PLACEHOLDER
-            </span>
-          </div>
+        {block.images.map((img) => (
+          <ImageSlot
+            key={img.filename}
+            filename={img.filename}
+            src={img.src}
+            aspect="aspect-[4/3]"
+          />
         ))}
       </div>
       {block.note && <p className="mt-3 text-xs leading-relaxed text-fg-dim">{block.note}</p>}
@@ -261,7 +265,7 @@ function FeedbackBlock({
                 i % 2 === 0 ? "rotate-[-2deg]" : "rotate-[2deg]"
               }`}
             >
-              {q.src && q.hasPhoto ? (
+              {q.src ? (
                 <div className="relative aspect-[4/5] w-full overflow-hidden">
                   <Image
                     src={q.src}
