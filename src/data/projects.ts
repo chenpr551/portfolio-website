@@ -264,7 +264,7 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        images: [{ filename: "support-1.jpg" }, { filename: "support-2.jpg" }],
+        images: [{ filename: "support-1.webp" }, { filename: "support-2.webp" }],
         note: "控制室「地球联合国委员会」场景、发光手部特效场景",
       },
     ],
@@ -288,9 +288,9 @@ export const projects: Project[] = [
       {
         type: "visuals",
         images: [
-          { filename: "calligraphy.jpg" },
-          { filename: "pavilion.jpg" },
-          { filename: "scroll-writing.jpg" },
+          { filename: "calligraphy.webp" },
+          { filename: "pavilion.webp" },
+          { filename: "scroll-writing.webp" },
         ],
         note: "书法字构图、古建筑雾中场景、握笔书写古卷轴的手部特写",
       },
@@ -318,7 +318,7 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        images: [{ filename: "badge-closeup.jpg" }],
+        images: [{ filename: "badge-closeup.webp" }],
         note: "手持党徽特写",
       },
     ],
@@ -345,7 +345,7 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        images: [{ filename: "mascot-closeup.jpg" }, { filename: "banner.jpg" }],
+        images: [{ filename: "mascot-closeup.webp" }, { filename: "banner.webp" }],
         note: "吉祥物「小C」、「让我们携手并进 共绘美丽中国新画卷」宣传banner",
       },
     ],

@@ -10,15 +10,15 @@ const NODES = [
 /** key -> bare filename under public/images/ai-video/patrol-2/ */
 export const PATROL2_ASSETS: Record<string, string> = {
   "node-wireframe": "node-wireframe.webp",
-  "node-sphere": "node-sphere.png",
-  "node-datatexture": "node-datatexture.png",
-  "node-gradient": "node-gradient.png",
+  "node-sphere": "node-sphere.webp",
+  "node-datatexture": "node-datatexture.webp",
+  "node-gradient": "node-gradient.webp",
   "camera-in-scene": "camera-in-scene.webp",
   "cityscape-wide": "cityscape-wide.webp",
   "handtrack-demo": "handtrack-demo.jpg",
-  "child-statue": "child-statue.jpg",
-  "final-1": "final-1.jpg",
-  "final-2": "final-2.jpg",
+  "child-statue": "child-statue.webp",
+  "final-1": "final-1.webp",
+  "final-2": "final-2.webp",
 };
 
 export function Patrol2Detail({ images = {} }: { images?: Record<string, string | undefined> }) {
