@@ -5,7 +5,6 @@ import { getYouTubeId } from "@/lib/youtube";
 import { ProjectMediaCard } from "./ProjectMediaCard";
 import { PATROL_ASSETS } from "./custom-details/PatrolDetail";
 import { PATROL2_ASSETS } from "./custom-details/Patrol2Detail";
-import Image from "next/image";
 
 function resolveCustomImages(project: Project): Record<string, string | undefined> | undefined {
   const slug = project.assetSlug ?? project.id;
@@ -96,58 +95,6 @@ export function ProjectEntry({
           </div>
         )}
       </div>
-    </article>
-  );
-}
-
-export function ProjectLine({
-  project,
-  index,
-}: {
-  project: Project;
-  index: number;
-}) {
-  const coverSrc = resolveAsset(project.category, project.assetSlug ?? project.id, "cover.webp");
-
-  return (
-    <article className="group flex flex-col gap-2 border-t border-line py-6 sm:flex-row sm:items-baseline sm:gap-6 sm:py-7">
-      <span className="num font-display text-sm text-fg-dim sm:w-10">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      {coverSrc && (
-        <div className="relative h-14 w-24 shrink-0 overflow-hidden border border-line bg-bg-alt">
-          <Image src={coverSrc} alt={project.title} fill sizes="96px" className="object-cover" />
-        </div>
-      )}
-      <h3 className="font-display text-2xl font-medium tracking-tight sm:flex-1 sm:text-3xl">
-        {project.title}
-      </h3>
-      <span className="num text-sm text-fg-dim">{project.year}</span>
-      <div className="flex flex-wrap gap-2 sm:w-64 sm:justify-end">
-        {project.tools.slice(0, 3).map((tool) => (
-          <span
-            key={tool}
-            className="rounded-full border border-line px-3 py-1 text-[11px] text-fg-dim"
-          >
-            {tool}
-          </span>
-        ))}
-      </div>
-      {project.links && project.links.length > 0 && (
-        <a
-          href={project.links[0].url}
-          target="_blank"
-          rel="noreferrer"
-          className="text-sm tracking-wide text-fg-dim transition-colors group-hover:text-accent-orange sm:w-24 sm:text-right"
-        >
-          {project.links[0].label} →
-        </a>
-      )}
-      {project.description && (
-        <p className="basis-full pt-1 text-sm leading-relaxed text-fg-dim sm:hidden">
-          {project.description}
-        </p>
-      )}
     </article>
   );
 }
