@@ -3,6 +3,7 @@ import { Space_Grotesk, Noto_Sans_SC, Caveat } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/lib/language";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -34,9 +35,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${spaceGrotesk.variable} ${notoSansSC.variable} ${caveat.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-bg text-fg antialiased">
-        <Nav />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Nav />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

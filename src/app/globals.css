@@ -65,6 +65,19 @@ body::before {
   font-feature-settings: "tnum";
 }
 
+/* language-switch text fade, used wherever a bilingual field re-renders on lang change */
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.lang-fade {
+  animation: fadein 180ms ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;

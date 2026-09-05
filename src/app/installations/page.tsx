@@ -16,7 +16,10 @@ export default function InstallationsPage() {
         index={meta.index}
         label={meta.label}
         labelEn={meta.labelEn}
-        description="动作捕捉、投影与实时生成系统构建的空间叙事装置。"
+        description={{
+          zh: "动作捕捉、投影与实时生成系统构建的空间叙事装置。",
+          en: "Spatial narrative installations built with motion capture, projection, and real-time generative systems.",
+        }}
       />
       <div className="px-5 sm:px-8">
         <div className="mx-auto max-w-[1200px]">

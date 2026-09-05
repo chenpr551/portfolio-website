@@ -2,6 +2,7 @@ import { categoryMeta, type Project } from "@/data/projects";
 import { resolveAsset } from "@/lib/assets";
 import { resolveProject } from "@/lib/resolveProject";
 import { getYouTubeId } from "@/lib/youtube";
+import { LangText } from "./LangText";
 import { ProjectMediaCard } from "./ProjectMediaCard";
 import { PATROL_ASSETS } from "./custom-details/PatrolDetail";
 import { PATROL2_ASSETS } from "./custom-details/Patrol2Detail";
@@ -46,7 +47,11 @@ export function ProjectEntry({
         index={index}
         title={project.title}
         year={project.year}
-        categoryLabel={categoryMeta[project.category]?.label}
+        categoryLabel={
+          categoryMeta[project.category]
+            ? { zh: categoryMeta[project.category].label, en: categoryMeta[project.category].labelEn }
+            : undefined
+        }
         youtubeId={youtubeId}
         seed={index}
         infoStrip={resolved.infoStrip}
@@ -58,23 +63,27 @@ export function ProjectEntry({
 
       <div className="mt-8 max-w-[760px]">
         {project.client && (
-          <span className="font-display text-sm text-fg-dim">{project.client}</span>
+          <LangText as="span" className="block font-display text-sm text-fg-dim" field={project.client} />
         )}
 
-        {project.role && <p className="mt-3 text-sm text-fg-dim">{project.role}</p>}
+        {project.role && (
+          <LangText as="p" className="mt-3 block text-sm text-fg-dim" field={project.role} />
+        )}
 
-        <p className="mt-5 max-w-prose text-[15px] leading-relaxed text-fg/90">
-          {project.description}
-        </p>
+        <LangText
+          as="p"
+          className="mt-5 block max-w-prose text-[15px] leading-relaxed text-fg/90"
+          field={project.description}
+        />
 
         <div className="mt-6 flex flex-wrap gap-2">
           {project.tools.map((tool) => (
-            <span
-              key={tool}
-              className="rounded-full border border-line px-3 py-1 text-[12px] text-fg-dim"
-            >
-              {tool}
-            </span>
+            <LangText
+              key={tool.en}
+              as="span"
+              className="block rounded-full border border-line px-3 py-1 text-[12px] text-fg-dim"
+              field={tool}
+            />
           ))}
         </div>
 
@@ -88,7 +97,7 @@ export function ProjectEntry({
                 rel="noreferrer"
                 className="group inline-flex items-center gap-2 text-sm tracking-wide text-fg transition-colors hover:text-accent-orange"
               >
-                {link.label}
+                <LangText field={link.label} />
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
             ))}

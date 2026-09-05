@@ -1,5 +1,6 @@
 import "server-only";
 import type { DetailBlock, Project } from "@/data/projects";
+import type { Bilingual } from "./language";
 import { resolveAsset } from "./assets";
 
 function resolveBlock(category: string, slug: string, block: DetailBlock): DetailBlock {
@@ -21,7 +22,7 @@ function resolveBlock(category: string, slug: string, block: DetailBlock): Detai
         })),
         noteImages: block.noteImages
           ?.map((img) => ({ ...img, src: resolveAsset(category, slug, img.src) }))
-          .filter((img): img is { src: string; filename: string } => Boolean(img.src)),
+          .filter((img): img is { src: string; filename: Bilingual } => Boolean(img.src)),
       };
     case "visuals":
       return {

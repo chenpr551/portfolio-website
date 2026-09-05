@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { useState, type ComponentType } from "react";
 import type { DetailBlock } from "@/data/projects";
+import type { Bilingual } from "@/lib/language";
+import { useLanguage } from "@/lib/language";
+import { ui } from "@/lib/ui-strings";
 import { BLOCK_COLORS } from "@/lib/media";
 import { useProjectAccordion } from "./ProjectAccordion";
 import { ProjectDetail } from "./ProjectDetail";
@@ -32,23 +35,25 @@ export function ProjectMediaCard({
 }: {
   id: string;
   index: number;
-  title: string;
+  title: Bilingual;
   year: number;
-  categoryLabel?: string;
+  categoryLabel?: Bilingual;
   youtubeId?: string;
   seed: number;
-  infoStrip?: string;
+  infoStrip?: Bilingual;
   detail?: DetailBlock[];
   coverSrc?: string;
   customLayout?: boolean;
   customImages?: Record<string, string | undefined>;
 }) {
+  const { lang } = useLanguage();
   const { expandedId, toggle } = useProjectAccordion();
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const isOpen = expandedId === id;
   const color = BLOCK_COLORS[seed % BLOCK_COLORS.length];
   const CustomDetail = customLayout ? CUSTOM_LAYOUTS[id] : undefined;
   const hasDetail = CustomDetail || infoStrip || (detail && detail.length > 0);
+  const titleText = title[lang];
 
   return (
     <div className="w-full">
@@ -61,7 +66,7 @@ export function ProjectMediaCard({
         {coverSrc ? (
           <Image
             src={coverSrc}
-            alt={title}
+            alt={titleText}
             fill
             sizes="(min-width: 1400px) 1400px, 100vw"
             priority={index < 2}
@@ -86,13 +91,15 @@ export function ProjectMediaCard({
             <span className="num text-sm text-white/70">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <span className="num text-sm text-white/70">
+            <span key={lang} className="num lang-fade inline-block text-sm text-white/70">
               {year}
-              {categoryLabel ? ` · ${categoryLabel}` : ""}
+              {categoryLabel ? ` · ${categoryLabel[lang]}` : ""}
             </span>
           </div>
           <h3 className="mt-1 font-display text-3xl font-medium leading-[1.05] tracking-tight text-white sm:text-5xl">
-            {title}
+            <span key={lang} className="lang-fade inline-block">
+              {titleText}
+            </span>
           </h3>
         </div>
 
@@ -119,13 +126,13 @@ export function ProjectMediaCard({
                 <button
                   type="button"
                   onClick={() => toggle(id)}
-                  aria-label="收起"
+                  aria-label={ui.close[lang]}
                   className="mb-5 flex items-center gap-2 text-xs tracking-widest text-fg-dim transition-colors hover:text-fg"
                 >
                   <span className="flex h-6 w-6 items-center justify-center rounded-full border border-line">
                     ×
                   </span>
-                  收起 CLOSE
+                  {ui.close[lang]}
                 </button>
 
                 {youtubeId && (
@@ -134,7 +141,7 @@ export function ProjectMediaCard({
                       <iframe
                         className="h-full w-full"
                         src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
-                        title={title}
+                        title={titleText}
                         allow="accelerate; autoplay; encrypted-media; picture-in-picture"
                         allowFullScreen
                       />
@@ -143,11 +150,11 @@ export function ProjectMediaCard({
                         type="button"
                         onClick={() => setIframeLoaded(true)}
                         className="group relative block h-full w-full"
-                        aria-label={`播放 ${title}`}
+                        aria-label={lang === "zh" ? `播放 ${titleText}` : `Play ${titleText}`}
                       >
                         <Image
                           src={`https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`}
-                          alt={title}
+                          alt={titleText}
                           fill
                           sizes="(min-width: 1400px) 1400px, 100vw"
                           className="object-cover opacity-80 transition-opacity group-hover:opacity-100"
