@@ -420,10 +420,10 @@ export const projects: Project[] = [
       {
         type: "visuals",
         images: [
-          { filename: "gamemaker-objects.jpg" },
-          { filename: "level-script.jpg" },
-          { filename: "fake-antivirus.jpg" },
-          { filename: "fake-ad.jpg" },
+          { filename: "gamemaker-objects.webp" },
+          { filename: "level-script.webp" },
+          { filename: "fake-antivirus.webp" },
+          { filename: "fake-ad.webp" },
         ],
         note: "GameMaker对象列表面板、关卡控制脚本代码截图、虚假「Super Antivirus」警告弹窗、「Paster Battle」游戏内假广告",
       },
