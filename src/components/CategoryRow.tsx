@@ -53,11 +53,11 @@ export function CategoryRow({
 
       {hovered && (
         <div className="row-particles" aria-hidden="true">
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 12 }).map((_, i) => (
             <span
               key={i}
               className="particle"
-              style={{ "--delay": `${i * 0.35}s`, "--color": accent } as React.CSSProperties}
+              style={{ "--delay": `${i * 0.22}s`, "--color": accent } as React.CSSProperties}
             />
           ))}
         </div>
