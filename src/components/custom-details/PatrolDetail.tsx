@@ -1,22 +1,10 @@
 "use client";
 
 import { useLanguage } from "@/lib/language";
+import { PATROL_ASSETS } from "@/lib/custom-detail-assets";
 import { ImageSlot } from "./ImageSlot";
 
 const MJ_PARAMS = "--ar16:9 --raw --v7 --stylize 200 --chaos 10";
-
-/** key -> bare filename under public/images/ai-video/patrol/ */
-export const PATROL_ASSETS: Record<string, string> = {
-  "still-1": "still-1.webp",
-  "still-2": "still-2.webp",
-  "still-3": "still-3.webp",
-  "still-4": "still-4.webp",
-  "still-5": "still-5.webp",
-  "still-6": "still-6.webp",
-  "banner-treaty": "banner-treaty.jpg",
-  "light-installation": "light-installation.webp",
-  "lidar-panorama": "lidar-panorama.webp",
-};
 
 export function PatrolDetail({ images = {} }: { images?: Record<string, string | undefined> }) {
   const { lang } = useLanguage();

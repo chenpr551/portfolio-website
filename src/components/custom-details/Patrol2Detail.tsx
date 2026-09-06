@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/lib/language";
 import { ui } from "@/lib/ui-strings";
+import { PATROL2_ASSETS } from "@/lib/custom-detail-assets";
 import { ImageSlot } from "./ImageSlot";
 
 const NODES = [
@@ -10,19 +11,6 @@ const NODES = [
   { key: "node-datatexture", zh: "数据纹理", en: "Data Texture" },
   { key: "node-gradient", zh: "灰阶渐变", en: "Grayscale Gradient" },
 ];
-
-/** key -> bare filename under public/images/ai-video/patrol-2/ */
-export const PATROL2_ASSETS: Record<string, string> = {
-  "node-wireframe": "node-wireframe.webp",
-  "node-sphere": "node-sphere.webp",
-  "node-datatexture": "node-datatexture.webp",
-  "node-gradient": "node-gradient.webp",
-  "camera-in-scene": "camera-in-scene.webp",
-  "cityscape-wide": "cityscape-wide.webp",
-  "child-statue": "child-statue.webp",
-  "final-1": "final-1.webp",
-  "final-2": "final-2.webp",
-};
 
 export function Patrol2Detail({ images = {} }: { images?: Record<string, string | undefined> }) {
   const { lang } = useLanguage();

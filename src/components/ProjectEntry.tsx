@@ -2,10 +2,9 @@ import { categoryMeta, type Project } from "@/data/projects";
 import { resolveAsset } from "@/lib/assets";
 import { resolveProject } from "@/lib/resolveProject";
 import { getYouTubeId } from "@/lib/youtube";
+import { PATROL_ASSETS, PATROL2_ASSETS } from "@/lib/custom-detail-assets";
 import { LangText } from "./LangText";
 import { ProjectMediaCard } from "./ProjectMediaCard";
-import { PATROL_ASSETS } from "./custom-details/PatrolDetail";
-import { PATROL2_ASSETS } from "./custom-details/Patrol2Detail";
 
 function resolveCustomImages(project: Project): Record<string, string | undefined> | undefined {
   const slug = project.assetSlug ?? project.id;
