@@ -1,7 +1,8 @@
-import Link from "next/link";
 import ParticleField from "@/components/ParticleField";
-import { LangOnly, LangText } from "@/components/LangText";
+import { CategoryRow } from "@/components/CategoryRow";
+import { LangText } from "@/components/LangText";
 import { categoryMeta } from "@/data/projects";
+import { CATEGORY_ACCENTS } from "@/lib/media";
 import { ui } from "@/lib/ui-strings";
 
 export default function Home() {
@@ -35,30 +36,14 @@ export default function Home() {
       <section className="border-t border-line px-5 py-6 sm:px-8">
         <div className="mx-auto max-w-[1400px]">
           {entries.map((c, i) => (
-            <Link
+            <CategoryRow
               key={c.slug}
               href={`/${c.slug}`}
-              className="group flex items-baseline justify-between gap-6 border-b border-line py-8 transition-colors last:border-b-0 sm:py-10"
-            >
-              <div className="flex items-baseline gap-5 sm:gap-8">
-                <span className="num font-display text-sm text-fg-dim">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <LangText
-                  as="span"
-                  className="block font-display text-4xl font-medium tracking-tight transition-colors group-hover:text-accent-orange sm:text-6xl"
-                  field={{ zh: c.label, en: c.labelEn }}
-                />
-                <LangOnly show="zh">
-                  <span className="hidden text-sm tracking-wide text-fg-dim sm:inline">
-                    {c.labelEn}
-                  </span>
-                </LangOnly>
-              </div>
-              <span className="font-display text-2xl text-fg-dim transition-transform group-hover:translate-x-2 group-hover:text-fg sm:text-3xl">
-                →
-              </span>
-            </Link>
+              index={i}
+              label={c.label}
+              labelEn={c.labelEn}
+              accent={CATEGORY_ACCENTS[i % CATEGORY_ACCENTS.length]}
+            />
           ))}
         </div>
       </section>
