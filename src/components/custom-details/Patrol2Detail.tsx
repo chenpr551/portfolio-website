@@ -19,7 +19,6 @@ export const PATROL2_ASSETS: Record<string, string> = {
   "node-gradient": "node-gradient.webp",
   "camera-in-scene": "camera-in-scene.webp",
   "cityscape-wide": "cityscape-wide.webp",
-  "handtrack-demo": "handtrack-demo.jpg",
   "child-statue": "child-statue.webp",
   "final-1": "final-1.webp",
   "final-2": "final-2.webp",
@@ -107,20 +106,13 @@ export function Patrol2Detail({ images = {} }: { images?: Record<string, string 
         </div>
       </section>
 
-      {/* 4. 手势追踪说明文字 + 配图 */}
+      {/* 4. 手势追踪说明文字 */}
       <section className="border-b border-line py-9">
         <p className="max-w-[760px] text-[15px] leading-[1.7] text-fg-dim">
           {isZh
             ? "系统基于 MediaPipe 手势追踪，赋予观众对数字空间的主导权。"
             : "The system utilizes MediaPipe-based hand tracking to grant the viewer agency over the digital space."}
         </p>
-        <ImageSlot
-          filename={PATROL2_ASSETS["handtrack-demo"]}
-          src={images["handtrack-demo"]}
-          note={isZh ? "手势追踪演示（需与封面不同的画面）" : "Hand-tracking demo (different frame from cover)"}
-          aspect="aspect-video"
-          className="mt-5 max-w-[760px]"
-        />
       </section>
 
       {/* 5. 交互方式说明文字 */}

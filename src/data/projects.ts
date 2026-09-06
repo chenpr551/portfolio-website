@@ -168,15 +168,6 @@ export const projects: Project[] = [
           { src: "style-switch-lamp.gif", filename: { zh: "换台灯", en: "Lamp Style" } },
         ],
       },
-      {
-        type: "visuals",
-        heading: { zh: "装置展览现场", en: "Exhibition" },
-        images: [{ filename: "exhibition-1.jpg" }, { filename: "exhibition-2.jpg" }],
-        note: {
-          zh: "投影幕布 + 参与者剪影的现场照片",
-          en: "On-site photos of the projection surface and participants' silhouettes",
-        },
-      },
     ],
   },
   {
@@ -520,9 +511,9 @@ export const projects: Project[] = [
       {
         type: "visuals",
         images: [
-          { filename: "sketch.jpg" },
-          { filename: "contact-sheet.jpg" },
-          { filename: "glitch-still.jpg" },
+          { filename: "sketch.webp" },
+          { filename: "contact-sheet.webp" },
+          { filename: "glitch-still.webp" },
         ],
         note: {
           zh: "手绘无限楼梯草图、原始摄影小样 contact sheet、RGB色差故障效果剧照",
