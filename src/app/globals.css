@@ -78,40 +78,6 @@ body::before {
   animation: fadein 180ms ease;
 }
 
-/* custom cursor -- desktop with a real mouse only */
-@media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: none;
-  }
-  a,
-  button {
-    cursor: none;
-  }
-}
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(243, 237, 228, 0.9), transparent 70%);
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  opacity: 0.85;
-  transition:
-    background 0.3s ease,
-    scale 0.3s ease;
-  will-change: transform;
-}
-.custom-cursor.is-hovering {
-  scale: 1.8;
-  background: radial-gradient(circle, var(--hover-accent, var(--accent-orange)), transparent 70%);
-}
-
 /* home page category rows -- drifting soft-light particles on hover */
 .nav-row {
   position: relative;
@@ -159,8 +125,5 @@ body::before {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-  .custom-cursor {
-    display: none;
   }
 }

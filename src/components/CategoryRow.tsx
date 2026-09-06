@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LangOnly, LangText } from "./LangText";
-import { useCursorAccent } from "@/lib/cursor";
 
 export function CategoryRow({
   href,
@@ -19,20 +18,13 @@ export function CategoryRow({
   accent: string;
 }) {
   const [hovered, setHovered] = useState(false);
-  const { setAccent } = useCursorAccent();
 
   return (
     <Link
       href={href}
       className="nav-row group flex items-baseline justify-between gap-6 border-b border-line py-8 transition-colors last:border-b-0 sm:py-10"
-      onMouseEnter={() => {
-        setHovered(true);
-        setAccent(accent);
-      }}
-      onMouseLeave={() => {
-        setHovered(false);
-        setAccent(null);
-      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <div className="flex items-baseline gap-5 sm:gap-8">
         <span className="num font-display text-sm text-fg-dim">

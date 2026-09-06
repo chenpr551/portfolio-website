@@ -4,30 +4,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { categoryMeta } from "@/data/projects";
 import { useLanguage } from "@/lib/language";
-import { useCursorAccent } from "@/lib/cursor";
-import { CATEGORY_ACCENTS } from "@/lib/media";
 import { ui } from "@/lib/ui-strings";
 
 const links = [
-  ...Object.values(categoryMeta).map((c, i) => ({
+  ...Object.values(categoryMeta).map((c) => ({
     href: `/${c.slug}`,
     zh: c.label,
     en: c.labelEn,
-    accent: CATEGORY_ACCENTS[i % CATEGORY_ACCENTS.length],
   })),
-  { href: "/about", zh: ui.navAbout.zh, en: ui.navAbout.en, accent: "var(--fg)" },
+  { href: "/about", zh: ui.navAbout.zh, en: ui.navAbout.en },
 ];
 
 function LanguageToggle() {
   const { lang, setLang } = useLanguage();
-  const { setAccent } = useCursorAccent();
   return (
     <div className="flex items-center gap-2 text-[13px] tracking-wide">
       <button
         type="button"
         onClick={() => setLang("zh")}
-        onMouseEnter={() => setAccent("var(--fg)")}
-        onMouseLeave={() => setAccent(null)}
         className={`transition-all duration-150 active:scale-95 ${
           lang === "zh" ? "font-bold text-fg" : "text-fg-dim hover:text-fg"
         }`}
@@ -38,8 +32,6 @@ function LanguageToggle() {
       <button
         type="button"
         onClick={() => setLang("en")}
-        onMouseEnter={() => setAccent("var(--fg)")}
-        onMouseLeave={() => setAccent(null)}
         className={`transition-all duration-150 active:scale-95 ${
           lang === "en" ? "font-bold text-fg" : "text-fg-dim hover:text-fg"
         }`}
@@ -53,7 +45,6 @@ function LanguageToggle() {
 export default function Nav() {
   const pathname = usePathname();
   const { lang } = useLanguage();
-  const { setAccent } = useCursorAccent();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-line/70 bg-bg/85 backdrop-blur-sm">
@@ -61,8 +52,6 @@ export default function Nav() {
         <Link
           href="/"
           className="font-display text-sm font-medium tracking-[0.08em] text-fg"
-          onMouseEnter={() => setAccent("var(--fg)")}
-          onMouseLeave={() => setAccent(null)}
         >
           PENGRAN CHEN
         </Link>
@@ -77,8 +66,6 @@ export default function Nav() {
                   className={`relative py-1 transition-colors ${
                     active ? "text-fg" : "text-fg-dim hover:text-fg"
                   }`}
-                  onMouseEnter={() => setAccent(l.accent)}
-                  onMouseLeave={() => setAccent(null)}
                 >
                   <span key={lang} className="lang-fade inline-block">
                     {lang === "zh" ? l.zh : l.en}
