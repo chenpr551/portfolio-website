@@ -98,7 +98,7 @@ body::before {
   background: var(--color);
   filter: blur(18px);
   opacity: 0;
-  animation: drift-right 2.6s ease-in-out infinite;
+  animation: drift-right 2s ease-in-out infinite;
   animation-delay: var(--delay);
 }
 @keyframes drift-right {
@@ -107,7 +107,7 @@ body::before {
     transform: translateY(-50%) scale(0.8);
     opacity: 0;
   }
-  15% {
+  4% {
     opacity: 0.55;
   }
   85% {

@@ -49,7 +49,7 @@ export function CategoryRow({
             <span
               key={i}
               className="particle"
-              style={{ "--delay": `${i * 0.22}s`, "--color": accent } as React.CSSProperties}
+              style={{ "--delay": `${(-i * (2 / 12)).toFixed(3)}s`, "--color": accent } as React.CSSProperties}
             />
           ))}
         </div>
