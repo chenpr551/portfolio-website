@@ -3,7 +3,9 @@ import { Space_Grotesk, Noto_Sans_SC, Caveat } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 import { LanguageProvider } from "@/lib/language";
+import { CursorProvider } from "@/lib/cursor";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -36,9 +38,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-bg text-fg antialiased">
         <LanguageProvider>
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <CursorProvider>
+            <CustomCursor />
+            <Nav />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </CursorProvider>
         </LanguageProvider>
       </body>
     </html>

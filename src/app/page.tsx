@@ -5,6 +5,16 @@ import { categoryMeta } from "@/data/projects";
 import { CATEGORY_ACCENTS } from "@/lib/media";
 import { ui } from "@/lib/ui-strings";
 
+/** One representative cover per category, in categoryMeta order
+ * (installations/ai-video/experimental-video/games), for the home page's
+ * row-hover background reveal. */
+const CATEGORY_COVERS = [
+  "/images/installations/temporary-roommate/cover.webp",
+  "/images/ai-video/patrol/cover.webp",
+  "/images/experimental-video/between-steps/cover.webp",
+  "/images/games/close-the-ad/cover.webp",
+];
+
 export default function Home() {
   const entries = Object.values(categoryMeta);
 
@@ -43,6 +53,7 @@ export default function Home() {
               label={c.label}
               labelEn={c.labelEn}
               accent={CATEGORY_ACCENTS[i % CATEGORY_ACCENTS.length]}
+              coverSrc={CATEGORY_COVERS[i % CATEGORY_COVERS.length]}
             />
           ))}
         </div>

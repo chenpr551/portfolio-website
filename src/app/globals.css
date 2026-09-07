@@ -78,46 +78,82 @@ body::before {
   animation: fadein 180ms ease;
 }
 
-/* home page category rows -- drifting soft-light particles on hover */
+/* custom cursor -- desktop with a real mouse only */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(243, 237, 228, 0.9), transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition:
+    background 0.3s ease,
+    scale 0.3s ease;
+  animation: cursor-pulse 2s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes cursor-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    scale: 1;
+  }
+  50% {
+    opacity: 1;
+    scale: 1.15;
+  }
+}
+.custom-cursor.is-hovering {
+  scale: 1.8;
+  background: radial-gradient(circle, var(--hover-accent, var(--accent-orange)), transparent 70%);
+}
+
+/* home page category rows -- cover image fades in behind the label on hover */
 .nav-row {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  transition: transform 0.3s ease;
 }
-.row-particles {
+.nav-row.is-hovered {
+  transform: scale(1.02);
+}
+
+.nav-row-bg {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-}
-.particle {
-  position: absolute;
-  top: 50%;
-  left: -60px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--color);
-  filter: blur(18px);
   opacity: 0;
-  animation: drift-right 2s ease-in-out infinite;
-  animation-delay: var(--delay);
+  z-index: 0;
+  transition: opacity 0.4s ease;
 }
-@keyframes drift-right {
-  0% {
-    left: -60px;
-    transform: translateY(-50%) scale(0.8);
-    opacity: 0;
-  }
-  4% {
-    opacity: 0.55;
-  }
-  85% {
-    opacity: 0.55;
-  }
-  100% {
-    left: 100%;
-    transform: translateY(-50%) scale(1.1);
-    opacity: 0;
-  }
+.nav-row.is-hovered .nav-row-bg {
+  opacity: 1;
+}
+.nav-row-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.4));
+}
+
+.nav-row-content {
+  position: relative;
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -125,5 +161,8 @@ body::before {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+  .custom-cursor {
+    display: none;
   }
 }
