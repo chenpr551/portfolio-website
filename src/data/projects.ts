@@ -314,6 +314,7 @@ export const projects: Project[] = [
       zh: "2025 联想《双子星》AIGC 创作大赛新星奖作品，个人独立完成，15 天内制作，纯 AI 生成科幻短片。",
       en: '2025 Lenovo "Binary Star" AIGC Creation Contest Rising Star Award. A fully AI-generated sci-fi short film with an original story and character, produced solo within 15 days.',
     },
+    links: [{ label: { zh: "YouTube", en: "YouTube" }, url: "https://youtu.be/CJuy8FBYKA0" }],
     infoStrip: {
       zh: "2025联想《双子星》AIGC创作大赛 · 新星奖",
       en: '2025 Lenovo "Binary Star" AIGC Creation Contest · Rising Star Award',
