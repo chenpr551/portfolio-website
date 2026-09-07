@@ -413,30 +413,20 @@ export const projects: Project[] = [
       zh: "建党 104 周年主题 AI 短片。",
       en: "A short film celebrating the 104th anniversary of the founding of the Communist Party.",
     },
-    links: [
-      {
-        label: { zh: "新片场观看", en: "Watch on Xinpianchang" },
-        url: "https://www.xinpianchang.com/a13419870?channel=copyLink&from=webShare",
-      },
-    ],
+    links: [{ label: { zh: "YouTube", en: "YouTube" }, url: "https://youtube.com/shorts/HL7es7iejts?feature=share" }],
     infoStrip: {
-      zh: "庆祝党104周年生日系列短片 · 2025.06.17–2025.07.01 · 甲方：中视影光CTW",
-      en: "104th Anniversary short film series · 2025.06.17 – 2025.07.01 · Client: CTW (China Television Works)",
+      zh: "传承红色精神 书写时代答卷 ｜ 中视影光",
+      en: "Carrying Forward the Red Spirit, Writing the Answer of Our Times | CTW (China Television Works)",
     },
     detail: [
       {
         type: "concept",
         quote: [
           {
-            zh: "这是一部完全由AI生成的104秒短片，尝试讲述一位优秀共产党员的一生。全片由21个镜头与10个转场组成，总计消耗超过8000点数，使用即梦3.0 Pro + 可灵2.0视频模型 + Google Veo3 AI制作完成。",
-            en: "This 104-second short film is generated entirely by AI. It is an attempt to tell the life story of an outstanding Communist Party member. The film consists of 21 clips and 10 transitions, consuming a total of over 8,000 points. Jiemeng 3.0 Pro + Kelin 2.0 video model + Google Veo3 AI.",
+            zh: "全AI生成短片。个人2周制作，尝试讲述优秀党员的一生。全片共21个片段、10个转场，共消耗积分8K+。即梦3.0 Pro + 可灵2.0 视频模型 + Google Veo3 AI。",
+            en: "A fully AI-generated short film, produced individually over 2 weeks, attempting to tell the life story of an outstanding Communist Party member. The film consists of 21 clips and 10 transitions, consuming over 8,000 credits. Jiemeng 3.0 Pro + Kling 2.0 video model + Google Veo3 AI.",
           },
         ],
-      },
-      {
-        type: "visuals",
-        images: [{ filename: "badge-closeup.webp", aspect: "aspect-[1006/632]" }],
-        note: { zh: "手持党徽特写", en: "Close-up of hands holding a Party badge" },
       },
     ],
   },
