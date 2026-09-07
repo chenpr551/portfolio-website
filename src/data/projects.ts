@@ -362,12 +362,7 @@ export const projects: Project[] = [
       zh: "中国风 AI 动画短片，探索东方美学与 MV 式剪辑的结合。",
       en: "A Chinese-style AI animated short film exploring the combination of Eastern aesthetics and MV-style editing.",
     },
-    links: [
-      {
-        label: { zh: "新片场观看", en: "Watch on Xinpianchang" },
-        url: "https://www.xinpianchang.com/a13419849?channel=copyLink&from=webShare",
-      },
-    ],
+    links: [{ label: { zh: "YouTube", en: "YouTube" }, url: "https://youtu.be/qFSXrdcB18I" }],
     infoStrip: {
       zh: "The Gallery of The Mist 雾之书廊 · 2025.04–2025.05",
       en: "The Gallery of The Mist · 2025.04 – 2025.05",
@@ -386,7 +381,7 @@ export const projects: Project[] = [
         type: "visuals",
         images: [
           { filename: "calligraphy.webp", aspect: "aspect-[445/934]" },
-          { filename: "pavilion.webp", aspect: "aspect-[701/384]" },
+          { filename: "pavilion.webp", aspect: "aspect-[1456/816]" },
           { filename: "scroll-writing.webp", aspect: "aspect-[906/453]" },
         ],
         note: {
