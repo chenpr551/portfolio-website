@@ -403,7 +403,7 @@ export const projects: Project[] = [
       en: "AI Short Video Celebrating the 104th Anniversary of the Communist Party",
     },
     year: 2025,
-    client: { zh: "中视影光 CTW", en: "CTW (China Television Works)" },
+    client: { zh: "中视影光 CTVV", en: "CTVV (China Television Works)" },
     tools: [
       { zh: "即梦 AI", en: "Jimeng AI" },
       { zh: "可灵 AI", en: "KlingAI" },
@@ -416,7 +416,7 @@ export const projects: Project[] = [
     links: [{ label: { zh: "YouTube", en: "YouTube" }, url: "https://youtube.com/shorts/HL7es7iejts?feature=share" }],
     infoStrip: {
       zh: "传承红色精神 书写时代答卷 ｜ 中视影光",
-      en: "Carrying Forward the Red Spirit, Writing the Answer of Our Times | CTW (China Television Works)",
+      en: "Carrying Forward the Red Spirit, Writing the Answer of Our Times | CTVV (China Television Works)",
     },
     detail: [
       {

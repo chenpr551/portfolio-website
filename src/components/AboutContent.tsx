@@ -204,7 +204,7 @@ export default function AboutContent() {
           {lang === "zh" ? "联系 · CONTACT" : "CONTACT"}
         </h2>
         <p className="mt-3 text-sm text-fg-dim">
-          {lang === "zh" ? "多伦多，安大略" : "Toronto, Ontario"}
+          {lang === "zh" ? "中国，香港" : "Hong Kong, China"}
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-6">
           <a
