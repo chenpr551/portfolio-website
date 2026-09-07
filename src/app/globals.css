@@ -101,22 +101,11 @@ body::before {
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
+  opacity: 0.85;
   transition:
     background 0.3s ease,
     scale 0.3s ease;
-  animation: cursor-pulse 2s ease-in-out infinite;
   will-change: transform;
-}
-@keyframes cursor-pulse {
-  0%,
-  100% {
-    opacity: 0.6;
-    scale: 1;
-  }
-  50% {
-    opacity: 1;
-    scale: 1.15;
-  }
 }
 .custom-cursor.is-hovering {
   scale: 1.8;
