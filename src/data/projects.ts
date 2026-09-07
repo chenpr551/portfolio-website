@@ -483,7 +483,7 @@ export const projects: Project[] = [
       {
         type: "visuals",
         images: [
-          { filename: "mascot-closeup.webp", aspect: "aspect-[684/989]" },
+          { filename: "mascot-closeup.webp", aspect: "aspect-[1800/983]" },
           { filename: "banner.webp", aspect: "aspect-[1445/707]" },
         ],
         note: {

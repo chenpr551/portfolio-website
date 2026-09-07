@@ -226,13 +226,14 @@ function VisualsBlock({
   return (
     <div>
       <BlockLabel index={index} label={label} />
-      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
+      <div className="mt-5 flex w-full flex-wrap gap-4">
         {block.images.map((img) => (
           <ImageSlot
             key={img.filename}
             filename={img.filename}
             src={img.src}
             aspect={img.aspect ?? "aspect-[4/3]"}
+            className="h-40 w-auto shrink-0 sm:h-52"
           />
         ))}
       </div>
