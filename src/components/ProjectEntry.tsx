@@ -2,9 +2,20 @@ import { categoryMeta, type Project } from "@/data/projects";
 import { resolveAsset } from "@/lib/assets";
 import { resolveProject } from "@/lib/resolveProject";
 import { getYouTubeId } from "@/lib/youtube";
+import type { VideoEmbed } from "@/lib/video";
 import { PATROL_ASSETS, PATROL2_ASSETS } from "@/lib/custom-detail-assets";
 import { LangText } from "./LangText";
 import { ProjectMediaCard } from "./ProjectMediaCard";
+
+function resolveVideoEmbed(project: Project): VideoEmbed | undefined {
+  const videoLink = project.links?.find((link) => getYouTubeId(link.url));
+  const youtubeId = videoLink ? getYouTubeId(videoLink.url) : null;
+  if (youtubeId) return { kind: "youtube", id: youtubeId };
+  if (project.videoEmbed) {
+    return { kind: "xinpianchang", aid: project.videoEmbed.aid, mid: project.videoEmbed.mid };
+  }
+  return undefined;
+}
 
 function resolveCustomImages(project: Project): Record<string, string | undefined> | undefined {
   const slug = project.assetSlug ?? project.id;
@@ -35,8 +46,8 @@ export function ProjectEntry({
   index: number;
 }) {
   const resolved = resolveProject(project);
+  const video = resolveVideoEmbed(project);
   const videoLink = project.links?.find((link) => getYouTubeId(link.url));
-  const youtubeId = videoLink ? getYouTubeId(videoLink.url) ?? undefined : undefined;
   const otherLinks = project.links?.filter((link) => link !== videoLink) ?? [];
 
   return (
@@ -51,7 +62,7 @@ export function ProjectEntry({
             ? { zh: categoryMeta[project.category].label, en: categoryMeta[project.category].labelEn }
             : undefined
         }
-        youtubeId={youtubeId}
+        video={video}
         seed={index}
         infoStrip={resolved.infoStrip}
         detail={resolved.detail}

@@ -84,6 +84,8 @@ export interface Project {
   detail?: DetailBlock[];
   /** "custom" routes the expanded card to a bespoke component instead of ProjectDetail */
   layout?: "custom";
+  /** Non-YouTube video embed (YouTube is detected from `links` instead). */
+  videoEmbed?: { provider: "xinpianchang"; aid: string; mid: string };
 }
 
 export const projects: Project[] = [
@@ -355,6 +357,7 @@ export const projects: Project[] = [
       zh: "中国风 AI 动画短片，探索东方美学与 MV 式剪辑的结合。",
       en: "A Chinese-style AI animated short film exploring the combination of Eastern aesthetics and MV-style editing.",
     },
+    videoEmbed: { provider: "xinpianchang", aid: "13419849", mid: "ro1V7E22jaLwdXAM" },
     infoStrip: {
       zh: "The Gallery of The Mist 雾之书廊 · 2025.04–2025.05",
       en: "The Gallery of The Mist · 2025.04 – 2025.05",
@@ -405,6 +408,7 @@ export const projects: Project[] = [
       zh: "建党 104 周年主题 AI 短片。",
       en: "A short film celebrating the 104th anniversary of the founding of the Communist Party.",
     },
+    videoEmbed: { provider: "xinpianchang", aid: "13419870", mid: "GmOEQGDDd3O718bn" },
     infoStrip: {
       zh: "庆祝党104周年生日系列短片 · 2025.06.17–2025.07.01 · 甲方：中视影光CTW",
       en: "104th Anniversary short film series · 2025.06.17 – 2025.07.01 · Client: CTW (China Television Works)",

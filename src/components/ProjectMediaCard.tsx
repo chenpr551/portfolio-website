@@ -7,6 +7,8 @@ import type { Bilingual } from "@/lib/language";
 import { useLanguage } from "@/lib/language";
 import { ui } from "@/lib/ui-strings";
 import { BLOCK_COLORS } from "@/lib/media";
+import type { VideoEmbed } from "@/lib/video";
+import { getEmbedIframeSrc, getEmbedThumbnail } from "@/lib/video";
 import { useProjectAccordion } from "./ProjectAccordion";
 import { ProjectDetail } from "./ProjectDetail";
 import { PatrolDetail } from "./custom-details/PatrolDetail";
@@ -25,7 +27,7 @@ export function ProjectMediaCard({
   title,
   year,
   categoryLabel,
-  youtubeId,
+  video,
   seed,
   infoStrip,
   detail,
@@ -38,7 +40,7 @@ export function ProjectMediaCard({
   title: Bilingual;
   year: number;
   categoryLabel?: Bilingual;
-  youtubeId?: string;
+  video?: VideoEmbed;
   seed: number;
   infoStrip?: Bilingual;
   detail?: DetailBlock[];
@@ -104,7 +106,7 @@ export function ProjectMediaCard({
         </div>
 
         <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/40 text-white transition-transform duration-300 group-hover:scale-110">
-          {isOpen ? "×" : youtubeId ? "▶" : "+"}
+          {isOpen ? "×" : video ? "▶" : "+"}
         </div>
       </button>
 
@@ -135,14 +137,14 @@ export function ProjectMediaCard({
                   {ui.close[lang]}
                 </button>
 
-                {youtubeId && (
+                {video && (
                   <div className="relative aspect-video w-full overflow-hidden bg-black">
                     {iframeLoaded ? (
                       <iframe
                         className="h-full w-full"
-                        src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
+                        src={getEmbedIframeSrc(video)}
                         title={titleText}
-                        allow="accelerate; autoplay; encrypted-media; picture-in-picture"
+                        allow="accelerate; autoplay; encrypted-media; picture-in-picture; fullscreen"
                         allowFullScreen
                       />
                     ) : (
@@ -153,7 +155,7 @@ export function ProjectMediaCard({
                         aria-label={lang === "zh" ? `播放 ${titleText}` : `Play ${titleText}`}
                       >
                         <Image
-                          src={`https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`}
+                          src={getEmbedThumbnail(video) ?? coverSrc ?? ""}
                           alt={titleText}
                           fill
                           sizes="(min-width: 1400px) 1400px, 100vw"
@@ -170,7 +172,7 @@ export function ProjectMediaCard({
                 )}
 
                 {hasDetail && (
-                  <div className={youtubeId ? "mt-9" : ""}>
+                  <div className={video ? "mt-9" : ""}>
                     {CustomDetail ? (
                       <CustomDetail images={customImages} />
                     ) : (
