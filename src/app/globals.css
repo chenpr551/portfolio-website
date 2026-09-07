@@ -102,13 +102,15 @@ body::before {
   z-index: 9999;
   mix-blend-mode: difference;
   opacity: 0.85;
-  transition:
-    background 0.3s ease,
-    scale 0.3s ease;
+  /* Only color transitions here -- position/scale are baked into a single
+     `transform` string in JS (see CustomCursor.tsx). Mixing the independent
+     `scale` property with a JS-driven `transform` would compose the two
+     (the translate ends up multiplied by the scale factor), which is
+     exactly the bug this replaced. */
+  transition: background 0.3s ease;
   will-change: transform;
 }
 .custom-cursor.is-hovering {
-  scale: 1.8;
   background: radial-gradient(circle, var(--hover-accent, var(--accent-orange)), transparent 70%);
 }
 
