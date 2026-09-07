@@ -45,8 +45,10 @@ export type DetailBlock =
       type: "visuals";
       /** Full bilingual heading override; defaults to ui.blockVisuals */
       heading?: Bilingual;
-      /** Bare filenames under the project's asset folder, each resolved (or placeholder'd) individually */
-      images: { filename: string; src?: string }[];
+      /** Bare filenames under the project's asset folder, each resolved (or placeholder'd) individually.
+       * `aspect` is a Tailwind arbitrary aspect-ratio class (e.g. "aspect-[1335/557]") matching the
+       * source image's real proportions; defaults to "aspect-[4/3]" when omitted. */
+      images: { filename: string; src?: string; aspect?: string }[];
       note?: Bilingual;
     }
   | {
@@ -333,7 +335,10 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        images: [{ filename: "support-1.webp" }, { filename: "support-2.webp" }],
+        images: [
+          { filename: "support-1.webp", aspect: "aspect-[1335/557]" },
+          { filename: "support-2.webp", aspect: "aspect-[1074/676]" },
+        ],
         note: {
           zh: "控制室「地球联合国委员会」场景、发光手部特效场景",
           en: 'Control room "Earth United Nations Committee" scene, glowing hand-effect scene',
@@ -380,9 +385,9 @@ export const projects: Project[] = [
       {
         type: "visuals",
         images: [
-          { filename: "calligraphy.webp" },
-          { filename: "pavilion.webp" },
-          { filename: "scroll-writing.webp" },
+          { filename: "calligraphy.webp", aspect: "aspect-[445/934]" },
+          { filename: "pavilion.webp", aspect: "aspect-[701/384]" },
+          { filename: "scroll-writing.webp", aspect: "aspect-[906/453]" },
         ],
         note: {
           zh: "书法字构图、古建筑雾中场景、握笔书写古卷轴的手部特写",
@@ -435,7 +440,7 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        images: [{ filename: "badge-closeup.webp" }],
+        images: [{ filename: "badge-closeup.webp", aspect: "aspect-[1006/632]" }],
         note: { zh: "手持党徽特写", en: "Close-up of hands holding a Party badge" },
       },
     ],
@@ -477,7 +482,10 @@ export const projects: Project[] = [
       },
       {
         type: "visuals",
-        images: [{ filename: "mascot-closeup.webp" }, { filename: "banner.webp" }],
+        images: [
+          { filename: "mascot-closeup.webp", aspect: "aspect-[684/989]" },
+          { filename: "banner.webp", aspect: "aspect-[1445/707]" },
+        ],
         note: {
           zh: "吉祥物「小C」、「让我们携手并进 共绘美丽中国新画卷」宣传banner",
           en: 'Mascot "Xiao C", promotional banner reading "Let\'s move forward hand in hand to paint a beautiful new China"',
@@ -527,9 +535,9 @@ export const projects: Project[] = [
       {
         type: "visuals",
         images: [
-          { filename: "sketch.webp" },
-          { filename: "contact-sheet.webp" },
-          { filename: "glitch-still.webp" },
+          { filename: "sketch.webp", aspect: "aspect-[374/1250]" },
+          { filename: "contact-sheet.webp", aspect: "aspect-[1387/664]" },
+          { filename: "glitch-still.webp", aspect: "aspect-[770/1058]" },
         ],
         note: {
           zh: "手绘无限楼梯草图、原始摄影小样 contact sheet、RGB色差故障效果剧照",
@@ -592,10 +600,10 @@ export const projects: Project[] = [
       {
         type: "visuals",
         images: [
-          { filename: "gamemaker-objects.webp" },
-          { filename: "level-script.webp" },
-          { filename: "fake-antivirus.webp" },
-          { filename: "fake-ad.webp" },
+          { filename: "gamemaker-objects.webp", aspect: "aspect-[349/1398]" },
+          { filename: "level-script.webp", aspect: "aspect-[1387/588]" },
+          { filename: "fake-antivirus.webp", aspect: "aspect-[1090/470]" },
+          { filename: "fake-ad.webp", aspect: "aspect-[560/400]" },
         ],
         note: {
           zh: "GameMaker对象列表面板、关卡控制脚本代码截图、虚假「Super Antivirus」警告弹窗、「Paster Battle」游戏内假广告",

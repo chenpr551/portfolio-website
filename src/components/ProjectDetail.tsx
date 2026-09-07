@@ -232,7 +232,7 @@ function VisualsBlock({
             key={img.filename}
             filename={img.filename}
             src={img.src}
-            aspect="aspect-[4/3]"
+            aspect={img.aspect ?? "aspect-[4/3]"}
           />
         ))}
       </div>
