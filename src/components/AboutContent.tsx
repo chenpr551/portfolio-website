@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLanguage, type Bilingual } from "@/lib/language";
 
 const summary: Bilingual = {
@@ -108,7 +109,18 @@ export default function AboutContent() {
 
   return (
     <div key={lang} className="lang-fade">
-      <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-fg/90">{summary[lang]}</p>
+      <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-start">
+        <p className="max-w-xl text-[15px] leading-relaxed text-fg/90 sm:flex-1">{summary[lang]}</p>
+        <div className="relative aspect-[1080/1502] w-40 shrink-0 overflow-hidden border border-line bg-bg-alt sm:w-48 lg:w-56">
+          <Image
+            src="/images/about/profile.webp"
+            alt="Pengran Chen"
+            fill
+            sizes="(min-width: 1024px) 224px, (min-width: 640px) 192px, 160px"
+            className="object-cover"
+          />
+        </div>
+      </div>
 
       <section className="mt-16">
         <h2 className="font-display text-sm tracking-[0.15em] text-fg-dim">
