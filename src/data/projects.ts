@@ -460,6 +460,7 @@ export const projects: Project[] = [
       zh: "商业委托角色设计与形象动画。",
       en: "Commissioned character design and animation.",
     },
+    links: [{ label: { zh: "YouTube", en: "YouTube" }, url: "https://youtu.be/PFSPMXD8BmI" }],
     infoStrip: {
       zh: "AI Character Design for BBMG Jidong Cement Group Co., Ltd. · 金隅冀东水泥低碳发展专题片AI形象动画制作 · 2025.05–2025.06",
       en: "AI Character Design for BBMG Jidong Cement Group Co., Ltd. · 2025.05 – 2025.06",
