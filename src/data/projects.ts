@@ -106,6 +106,7 @@ export const projects: Project[] = [
       zh: "动作捕捉 + 空间叙事的交互装置。参与者进入镜头视野后被实时转化为随机生成的家具，家具随人物移动；当两人靠近，各自的家具会跨越边界融合成更大的家具；融合后的家具 20 秒后消失。",
       en: "Motion capture + spatial storytelling installation. Participants entering the camera's field of view are instantly transformed into randomly generated furniture, moving with them; when two people come close, their furniture crosses boundaries and merges into a larger piece; merged furniture disappears after 20 seconds.",
     },
+    links: [{ label: { zh: "YouTube", en: "YouTube" }, url: "https://youtu.be/n-Au0q9D6Ew" }],
     featured: true,
     detail: [
       {
