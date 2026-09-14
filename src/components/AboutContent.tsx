@@ -214,14 +214,6 @@ export default function AboutContent() {
             chenpengran0315@gmail.com
           </a>
           <a
-            href="https://instagram.com/chenpr_"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm tracking-wide text-fg-dim transition-colors hover:text-fg"
-          >
-            @chenpr_
-          </a>
-          <a
             href="/resume.pdf"
             className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm tracking-wide text-fg-dim transition-colors hover:text-fg"
           >
